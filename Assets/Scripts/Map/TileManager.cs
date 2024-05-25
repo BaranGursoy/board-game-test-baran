@@ -3,6 +3,23 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
+    public static TileManager Instance;
+
+    public static Action MapGenerationFinished;
+
+    private void Awake()
+    {
+        if (Instance)
+        {
+            Destroy(gameObject);
+        }
+
+        else
+        {
+            Instance = this;
+        }
+    }
+
     [SerializeField] private int xDimensionTileCount;
     [SerializeField] private int zDimensionTileCount;
     [SerializeField] private TileFactory tileFactory;

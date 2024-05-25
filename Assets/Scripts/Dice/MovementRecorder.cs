@@ -108,15 +108,16 @@ public class MovementRecorder : MonoBehaviour
                 {
                     diceManager.diceDataList[j].diceInteraction.PlaySoundRollHigh();
                 }
-
-                /*if(recordingDataList[j].recordedAnimation[i].isNotMoving == true)
+                
+                if(recordingDataList[j].recordedAnimation[i].isNotMoving && !diceManager.diceDataList[j].diceLogic.sentResult)
                 {
-                    diceManager.diceDataList[j].diceInteraction.ShowDiceResult();
-                }*/
+                    DiceManager.DiceStopped?.Invoke(diceManager.diceDataList[j].diceLogic.FindFaceResult());
+                    diceManager.diceDataList[j].diceLogic.sentResult = true;
+                }
             }
             yield return new WaitForFixedUpdate();
         }
-
+        
         playback = null;
     }
     

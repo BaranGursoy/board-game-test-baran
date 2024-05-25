@@ -6,10 +6,15 @@ using Random = UnityEngine.Random;
 
 public class DiceManager : MonoBehaviour
 {
+    public static Action<int> DiceStopped;
+    public static Action<int> PlayerCanMove;
+    
     public GameObject dicePrefab;
     public MovementRecorder movementRecorder;
 
-    private int _diceCount;
+    private int _totalDiceCount;
+    private int _stoppedDiceCount;
+    private int _totalDiceResult;
     
     public List<int> targetedResult = new List<int>();
     
@@ -25,12 +30,31 @@ public class DiceManager : MonoBehaviour
         {5, new Vector3(180, 0, 0)},
         {6, new Vector3(90, 0, 0)}
     };
+    
+    private void Start()
+    {
+        DiceStopped += CanPlayerMove;
+    }
+
+    private void CanPlayerMove(int diceResult)
+    {
+        _stoppedDiceCount++;
+        _totalDiceResult += diceResult;
+
+        if (_stoppedDiceCount == _totalDiceCount)
+        {
+            PlayerCanMove?.Invoke(_totalDiceResult);
+
+            _stoppedDiceCount = 0;
+            _totalDiceResult = 0;
+        }
+    }
 
     private void SetDicesInformation()
     {
         targetedResult.Clear();
         
-        _diceCount = InputFieldManager.Instance.inputFields.Count;
+        _totalDiceCount = InputFieldManager.Instance.inputFields.Count;
 
         foreach (var inputField in InputFieldManager.Instance.inputFields)
         {
@@ -40,18 +64,18 @@ public class DiceManager : MonoBehaviour
     public void ThrowTheDice()
     {
         SetDicesInformation();
-        GenerateDice(_diceCount);
+        GenerateDice(_totalDiceCount);
 
         //Generate list of dices, then put it into the simulation
         List<GameObject> diceList = new List<GameObject>();
-        for (int i = 0; i < _diceCount; i++)
+        for (int i = 0; i < _totalDiceCount; i++)
         {
             diceList.Add(diceDataList[i].diceObject);
         }
         movementRecorder.StartSimulation(diceList);
 
         //Record the dice roll result
-        for (int i = 0; i < _diceCount; i++)
+        for (int i = 0; i < _totalDiceCount; i++)
         {
             diceDataList[i].diceLogic.FindFaceResult();
         }
@@ -110,8 +134,6 @@ public class DiceManager : MonoBehaviour
     {
         int x, y, z;
         
-        //Randomize X, Y, Z position in the bounding box
-
         Vector3 position = transform.position;
         
         Quaternion rotation = Quaternion.identity;
@@ -130,10 +152,7 @@ public class DiceManager : MonoBehaviour
     }
 
     [Serializable]
-    /// <summary>
-    /// The data containing all references to all dices
-    /// so we only need to do GetComponent call once in the script
-    /// </summary>
+
     public struct DiceData
     {
         public GameObject diceObject;
@@ -152,9 +171,6 @@ public class DiceManager : MonoBehaviour
     }
 
     [Serializable]
-    /// <summary>
-    /// This is a struct to hold all data needed to initialize the dice
-    /// </summary>
     public struct InitialState
     {
         public Vector3 position;

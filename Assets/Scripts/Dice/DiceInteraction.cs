@@ -32,11 +32,7 @@ public class DiceInteraction : MonoBehaviour
         isInSimulation = true;
         isNotMoving = false;
     }
-
-    public void ShowDiceResult()
-    {
-
-    }
+    
     public void PlaySoundRollLow()
     {
         if (!floorCollisionSound.isPlaying)

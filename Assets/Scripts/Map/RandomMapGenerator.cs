@@ -85,8 +85,9 @@ public class RandomMapGenerator : IMapGenerator
                 MapTile cornerTile = _tileFactory.CreateTile(cornerTileData, NextPosition(currentDirection, isCornerTile:true), currentRotationVector, _tileParentTransform);
                 tileList.Add(cornerTile);
             }
-            
         }
+        
+        TileManager.MapGenerationFinished?.Invoke();
     }
 
     private Vector3 NextPosition(Direction currentDirection, bool isCornerTile = false)

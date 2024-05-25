@@ -10,10 +10,12 @@ public class Dice : MonoBehaviour
     public FaceData[] faceDatas;
 
     public int defaultFaceResult = -1;
+    public bool sentResult = false;
     
     public void Reset()
     {
         defaultFaceResult = -1;
+        sentResult = false;
     }
     
     public void RotateDice(int alteredFaceResult)
@@ -37,7 +39,7 @@ public class Dice : MonoBehaviour
         transform.Rotate(rotationFromMatrix, Space.Self);
     }
     
-    public void FindFaceResult()
+    public int FindFaceResult()
     {
         int maxIndex = 0;
         for (int i = 1; i < faceDatas.Length; i++)
@@ -49,6 +51,8 @@ public class Dice : MonoBehaviour
             }
         }
         defaultFaceResult = faceDatas[maxIndex].result;
+
+        return faceDatas[maxIndex].result;
     }
 }
 
