@@ -9,9 +9,11 @@ public class DiceManager : MonoBehaviour
     public GameObject dicePrefab;
     public MovementRecorder movementRecorder;
 
-    [SerializeField] private int diceCount = 2;
+    private int _diceCount;
     
-    public List<int> targetedResult;
+    public List<int> targetedResult = new List<int>();
+    
+    [HideInInspector]
     public List<DiceData> diceDataList;
 
     public static readonly Dictionary<int, Vector3> RotationMatrix = new Dictionary<int, Vector3> // This matrix is for our dice's default rotation (2 is on top)
@@ -24,28 +26,41 @@ public class DiceManager : MonoBehaviour
         {6, new Vector3(90, 0, 0)}
     };
 
+    private void SetDicesInformation()
+    {
+        targetedResult.Clear();
+        
+        _diceCount = InputFieldManager.Instance.inputFields.Count;
+
+        foreach (var inputField in InputFieldManager.Instance.inputFields)
+        {
+            targetedResult.Add(inputField.GetDiceValue());
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            SetDicesInformation();
             ThrowTheDice();
         }
     }
 
     public void ThrowTheDice()
     {
-        GenerateDice(diceCount);
+        GenerateDice(_diceCount);
 
         //Generate list of dices, then put it into the simulation
         List<GameObject> diceList = new List<GameObject>();
-        for (int i = 0; i < diceCount; i++)
+        for (int i = 0; i < _diceCount; i++)
         {
             diceList.Add(diceDataList[i].diceObject);
         }
         movementRecorder.StartSimulation(diceList);
 
         //Record the dice roll result
-        for (int i = 0; i < diceCount; i++)
+        for (int i = 0; i < _diceCount; i++)
         {
             diceDataList[i].diceLogic.FindFaceResult();
         }
