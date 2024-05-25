@@ -33,8 +33,19 @@ public class PlayerController : MonoBehaviour
         {
             _playerTileIndex++;
             _playerTileIndex %= mapTiles.Count;
+
+            Quaternion endRotation = transform.rotation;
+
+            if (mapTiles[_playerTileIndex] is CornerTile)
+            {
+                transform.Rotate(0f, 90f, 0f);
+                endRotation = transform.rotation;
+                transform.Rotate(0f, -90f, 0f);
+            }
+            
             
             Vector3 startPosition = transform.position;
+            Quaternion startRotation = transform.rotation;
 
             float halfPointX = (mapTiles[_playerTileIndex].transform.position.x + transform.position.x) / 2f;
             float halfPointZ = (mapTiles[_playerTileIndex].transform.position.z + transform.position.z) / 2f;
@@ -61,11 +72,13 @@ public class PlayerController : MonoBehaviour
             while (passedTime <= halfTime)
             {
                 transform.position = Vector3.Lerp(startPosition, endPosition,passedTime/halfTime);
+                transform.rotation = Quaternion.Lerp(startRotation, endRotation, passedTime/halfTime);
                 passedTime += Time.deltaTime;
                 yield return null;
             }
             
             transform.position = endPosition;
+            transform.rotation = endRotation;
         }
         
     }
