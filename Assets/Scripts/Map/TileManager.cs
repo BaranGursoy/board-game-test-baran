@@ -7,12 +7,12 @@ public class TileManager : MonoBehaviour
     [SerializeField] private int zDimensionTileCount;
     [SerializeField] private TileFactory tileFactory;
     [SerializeField] private Transform tileStartPoint;
-    
+
     public IMapGenerator mapGenerator;
 
     private void Start()
     {
-        mapGenerator = new RandomMapGenerator(xDimensionTileCount, zDimensionTileCount, tileFactory, tileFactory.GetTileWidth, tileStartPoint);
+        mapGenerator = new RandomMapGenerator(xDimensionTileCount, zDimensionTileCount, tileFactory, tileFactory.GetTileWidth, tileStartPoint, transform);
         mapGenerator.GenerateMap();
     }
 

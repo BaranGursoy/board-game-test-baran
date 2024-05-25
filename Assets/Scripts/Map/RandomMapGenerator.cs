@@ -10,24 +10,26 @@ public class RandomMapGenerator : IMapGenerator
 
     private float _tileWidth;
     private Transform _tileStartPoint;
+    private Transform _tileParentTransform;
     
     private TileFactory _tileFactory;
 
     public RandomMapGenerator(int xDimension, int zDimension, TileFactory tileFactory, float tileWidth,
-        Transform tileStartPoint)
+        Transform tileStartPoint, Transform tileParentTransform)
     {
         this._xDimension = xDimension;
         this._zDimension = zDimension;
         this._tileFactory = tileFactory;
         this._tileWidth = tileWidth;
         this._tileStartPoint = tileStartPoint;
+        this._tileParentTransform = tileParentTransform;
     }
 
     public void GenerateMap()
     {
         GenerateRandomMap(_xDimension, _zDimension);
     }
-
+    
     public List<MapTile> GetTileList()
     {
         return tileList;
@@ -66,17 +68,17 @@ public class RandomMapGenerator : IMapGenerator
                 TileData tileData = CreateRandomTileData();
                 if (tileList.Count == 0)
                 {
-                    MapTile firstCreatedTile = _tileFactory.CreateTile(tileData, _tileStartPoint.position, currentRotationVector);
+                    MapTile firstCreatedTile = _tileFactory.CreateTile(tileData, _tileStartPoint.position, currentRotationVector, _tileParentTransform);
                     tileList.Add(firstCreatedTile);
                     continue;
                 }
                 
-                MapTile createdTile = _tileFactory.CreateTile(tileData, NextPosition(currentDirection), currentRotationVector);
+                MapTile createdTile = _tileFactory.CreateTile(tileData, NextPosition(currentDirection), currentRotationVector, _tileParentTransform);
                 tileList.Add(createdTile);
             }
 
             TileData cornerTileData = CreateCornerTileData();
-            MapTile cornerTile = _tileFactory.CreateTile(cornerTileData, NextPosition(currentDirection, isCornerTile:true), currentRotationVector);
+            MapTile cornerTile = _tileFactory.CreateTile(cornerTileData, NextPosition(currentDirection, isCornerTile:true), currentRotationVector, _tileParentTransform);
             tileList.Add(cornerTile);
         }
     }

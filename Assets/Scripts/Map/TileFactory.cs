@@ -10,7 +10,7 @@ public class TileFactory : MonoBehaviour
 
     public float GetTileWidth => emptyTilePrefab.GetComponent<MeshRenderer>().bounds.size.x;
 
-    public MapTile CreateTile(TileData data, Vector3 position, Vector3 rotationVector)
+    public MapTile CreateTile(TileData data, Vector3 position, Vector3 rotationVector, Transform parentTransform)
     {
         GameObject tilePrefab = null;
 
@@ -43,7 +43,7 @@ public class TileFactory : MonoBehaviour
 
         if (tilePrefab != null)
         {
-            GameObject tileObject = Instantiate(tilePrefab, position, Quaternion.identity);
+            GameObject tileObject = Instantiate(tilePrefab, position, Quaternion.identity, parentTransform);
             tileObject.transform.Rotate(rotationVector, Space.Self);
             MapTile mapTile = tileObject.GetComponent<MapTile>();
             mapTile.SetTileData(data);
