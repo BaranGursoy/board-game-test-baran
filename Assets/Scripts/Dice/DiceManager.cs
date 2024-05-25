@@ -42,13 +42,13 @@ public class DiceManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SetDicesInformation();
             ThrowTheDice();
         }
     }
 
     public void ThrowTheDice()
     {
+        SetDicesInformation();
         GenerateDice(_diceCount);
 
         //Generate list of dices, then put it into the simulation
@@ -121,7 +121,7 @@ public class DiceManager : MonoBehaviour
         
         //Randomize X, Y, Z position in the bounding box
 
-        Vector3 position = transform.position + Random.insideUnitSphere;
+        Vector3 position = transform.position;
         
         Quaternion rotation = Quaternion.identity;
 
