@@ -16,6 +16,11 @@ public class JSONMapGenerator : MonoBehaviour, IMapGenerator
         GenerateMapFromJSON(jsonData);
     }
 
+    public List<MapTile> GetTileList()
+    {
+        return null;
+    }
+
     private void GenerateMapFromJSON(string s)
     {
        //

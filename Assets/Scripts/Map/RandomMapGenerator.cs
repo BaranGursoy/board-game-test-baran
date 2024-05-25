@@ -1,40 +1,151 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RandomMapGenerator : IMapGenerator
 {
-    private int width;
-    private int height;
-    private TileFactory tileFactory;
-    private Transform parentTransform; // Parent transform for organizing tiles in the hierarchy
+    [SerializeField] private List<MapTile> tileList = new List<MapTile>();
 
-    public RandomMapGenerator(int width, int height, TileFactory tileFactory, Transform parentTransform)
+    private int _xDimension;
+    private int _zDimension;
+
+    private float _tileWidth;
+    private Transform _tileStartPoint;
+    
+    private TileFactory _tileFactory;
+
+    public RandomMapGenerator(int xDimension, int zDimension, TileFactory tileFactory, float tileWidth,
+        Transform tileStartPoint)
     {
-        this.width = width;
-        this.height = height;
-        this.tileFactory = tileFactory;
-        this.parentTransform = parentTransform;
+        this._xDimension = xDimension;
+        this._zDimension = zDimension;
+        this._tileFactory = tileFactory;
+        this._tileWidth = tileWidth;
+        this._tileStartPoint = tileStartPoint;
     }
 
     public void GenerateMap()
     {
-        GenerateRandomMap(width, height);
+        GenerateRandomMap(_xDimension, _zDimension);
     }
 
-    private void GenerateRandomMap(int width, int height)
+    public List<MapTile> GetTileList()
     {
-        // Generate random map data
-        // For each tile data, create a tile using the tileFactory
-        // Position tiles in a grid
-
-        // Example pseudocode:
-        // for (int x = 0; x < width; x++)
-        // {
-        //     for (int y = 0; y < height; y++)
-        //     {
-        //         TileData tileData = CreateRandomTileData();
-        //         Vector3 position = new Vector3(x, 0, y);
-        //         tileFactory.CreateTile(tileData, position);
-        //     }
-        // }
+        return tileList;
     }
+
+    private void GenerateRandomMap(int xDimension, int zDimension)
+    {
+        Direction currentDirection = Direction.Left;
+        
+        for (int i = 0; i < 4; i++)
+        {
+            int currentDimension = i % 2 == 0 ? xDimension : zDimension;
+            Vector3 currentRotationVector = Vector3.zero;
+            
+            switch (i)
+            {
+                case 0 :
+                    currentDirection = Direction.Left;
+                    break;
+                case 1 :
+                    currentDirection = Direction.Up;
+                    currentRotationVector = new Vector3(0, 90f, 0f);
+                    break;
+                case 2 :
+                    currentDirection = Direction.Right;
+                    currentRotationVector = new Vector3(0, 180f, 0f);
+                    break;
+                case 3 :
+                    currentDirection = Direction.Down;
+                    currentRotationVector = new Vector3(0, -90f, 0f);
+                    break;
+            }
+            
+            for (int j = 0; j < currentDimension; j++)
+            {
+                TileData tileData = CreateRandomTileData();
+                if (tileList.Count == 0)
+                {
+                    MapTile firstCreatedTile = _tileFactory.CreateTile(tileData, _tileStartPoint.position, currentRotationVector);
+                    tileList.Add(firstCreatedTile);
+                    continue;
+                }
+                
+                MapTile createdTile = _tileFactory.CreateTile(tileData, NextPosition(currentDirection), currentRotationVector);
+                tileList.Add(createdTile);
+            }
+
+            TileData cornerTileData = CreateCornerTileData();
+            MapTile cornerTile = _tileFactory.CreateTile(cornerTileData, NextPosition(currentDirection, isCornerTile:true), currentRotationVector);
+            tileList.Add(cornerTile);
+        }
+    }
+
+    private Vector3 NextPosition(Direction currentDirection, bool isCornerTile = false)
+    {
+        Vector3 nextPosition;
+
+        float factor = tileList[^1] is CornerTile ? 1.33f : 1.0f;
+
+        if (isCornerTile) factor = 1.33f;
+
+        switch (currentDirection)
+        {
+            case Direction.Left:
+                nextPosition = tileList[^1].transform.position + (_tileWidth * factor * Vector3.left);
+                break;
+            case Direction.Up:
+                nextPosition = tileList[^1].transform.position + (_tileWidth * factor * Vector3.forward);
+                break;
+            case Direction.Right:
+                nextPosition = tileList[^1].transform.position + (_tileWidth * factor * Vector3.right);
+                break;
+            case Direction.Down:
+                nextPosition = tileList[^1].transform.position + (_tileWidth * factor * Vector3.back);
+                break;
+            default:
+                nextPosition = Vector3.zero;
+                break;
+        }
+
+        return nextPosition;
+    }
+
+    private TileData CreateRandomTileData()
+    {
+        TileData tileData = new TileData();
+        int randomValue = Random.Range(0, 5);
+        if (randomValue == 0)
+        {
+            tileData.isEmpty = true;
+        }
+        else
+        {
+            tileData.isEmpty = false;
+            ItemType itemType = (ItemType)Random.Range(0, 3);
+            tileData.itemType = itemType;
+            int itemCount = Random.Range(1, 20);
+            tileData.quantity = itemCount;
+        }
+        return tileData;
+    }
+    
+    private TileData CreateCornerTileData()
+    {
+        TileData tileData = new TileData
+        {
+            isCorner = true
+        };
+
+        return tileData;
+    }
+
+}
+
+public enum Direction
+{
+    Left,
+    Up,
+    Right,
+    Down
 }
