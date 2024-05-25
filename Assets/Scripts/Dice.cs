@@ -7,22 +7,9 @@ using UnityEngine.Serialization;
 public class Dice : MonoBehaviour
 {
     [Header("References")]
-    public DiceData diceData;
-    public GameObject[] faceDetectors;
-    
+    public FaceData[] faceDatas;
+
     public int defaultFaceResult = -1;
-
-    private Dictionary<int, int> faceResults = new Dictionary<int, int>();
-
-    private void Awake()
-    {
-        faceResults.Add(2, 0);
-        faceResults.Add(5, 1);
-        faceResults.Add(4, 2);
-        faceResults.Add(3, 3);
-        faceResults.Add(6, 4);
-        faceResults.Add(1, 5);
-    }
     
     public void Reset()
     {
@@ -32,34 +19,42 @@ public class Dice : MonoBehaviour
     public void RotateDice(int alteredFaceResult)
     {
         Debug.Log(defaultFaceResult);
+        Vector3 rotationFromIdentity = DiceManager.RotationMatrix[defaultFaceResult];
+
+        float inverseX = rotationFromIdentity.x == 0f ? 0f : 360f - rotationFromIdentity.x;
+        float inverseY = rotationFromIdentity.y == 0f ? 0f : 360f - rotationFromIdentity.y;
+        float inverseZ = rotationFromIdentity.z == 0f ? 0f : 360f - rotationFromIdentity.z;
+
+
+        Vector3 inverseRotationToDefault = new Vector3(inverseX, inverseY, inverseZ);
         
-        Vector3 rotationFromMatrix =
-            diceData.faceRelativeRotation[defaultFaceResult].rotation[0];
-        transform.Rotate(rotationFromMatrix, Space.Self);
+        // First change it to default rotation
+        transform.Rotate(inverseRotationToDefault,Space.Self);
 
-
-        if (alteredFaceResult != 2)
-        {
-            rotationFromMatrix =
-                diceData.faceRelativeRotation[0].rotation[faceResults[alteredFaceResult]];
+        Vector3 rotationFromMatrix = DiceManager.RotationMatrix[alteredFaceResult];
             
-            transform.Rotate(rotationFromMatrix, Space.Self);
-
-        }
-
+        // Then rotate according to default's rotation matrix
+        transform.Rotate(rotationFromMatrix, Space.Self);
     }
     
     public void FindFaceResult()
     {
         int maxIndex = 0;
-        for (int i = 1; i < faceDetectors.Length; i++)
+        for (int i = 1; i < faceDatas.Length; i++)
         {
-            if (faceDetectors[maxIndex].transform.position.y <
-                faceDetectors[i].transform.position.y)
+            if (faceDatas[maxIndex].faceDetector.transform.position.y <
+                faceDatas[i].faceDetector.transform.position.y)
             {
                 maxIndex = i;
             }
         }
-        defaultFaceResult = maxIndex;
+        defaultFaceResult = faceDatas[maxIndex].result;
     }
+}
+
+[Serializable]
+public struct FaceData
+{
+    public GameObject faceDetector;
+    public int result;
 }

@@ -14,6 +14,16 @@ public class DiceManager : MonoBehaviour
     public List<int> targetedResult;
     public List<DiceData> diceDataList;
 
+    public static readonly Dictionary<int, Vector3> RotationMatrix = new Dictionary<int, Vector3> // This matrix is for our dice's default rotation (2 is on top)
+    {
+        {1, new Vector3(270, 0, 0)},
+        {2, new Vector3(0, 0, 0)},
+        {3, new Vector3(0, 0, 270)},
+        {4, new Vector3(0, 0, 90)},
+        {5, new Vector3(180, 0, 0)},
+        {6, new Vector3(90, 0, 0)}
+    };
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))

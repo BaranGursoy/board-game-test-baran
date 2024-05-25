@@ -172,9 +172,6 @@ MonoBehaviour:
   isContactWithDice: 0
   isInSimulation: 1
   isNotMoving: 0
-  diceData: {fileID: 11400000, guid: 10899e2d365dc2f4d883ceca1243a793, type: 2}
-  diceLogic: {fileID: 1766362593331126965}
-  meshRenderer: {fileID: 2305177937432420715}
   floorCollisionSound: {fileID: 2788266974511630178}
   diceCollisionSound: {fileID: 684103387350975228}
 --- !u!1 &1404967239556751953
@@ -407,14 +404,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b7d9773d9f9454b80ad9e2464cb148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diceData: {fileID: 11400000, guid: 10899e2d365dc2f4d883ceca1243a793, type: 2}
-  faceDetectors:
-  - {fileID: 4566338034084713875}
-  - {fileID: 213537432003637656}
-  - {fileID: 2544423629591063862}
-  - {fileID: 2367636471571202579}
-  - {fileID: 99604931179623494}
-  - {fileID: 6029233870081553941}
+  faceDatas:
+  - faceDetector: {fileID: 6029233870081553941}
+    result: 1
+  - faceDetector: {fileID: 4566338034084713875}
+    result: 2
+  - faceDetector: {fileID: 2367636471571202579}
+    result: 3
+  - faceDetector: {fileID: 2544423629591063862}
+    result: 4
+  - faceDetector: {fileID: 213537432003637656}
+    result: 5
+  - faceDetector: {fileID: 99604931179623494}
+    result: 6
   defaultFaceResult: -1
 --- !u!1 &2367636471571202579
 GameObject:
