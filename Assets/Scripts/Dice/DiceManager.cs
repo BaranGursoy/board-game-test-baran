@@ -37,15 +37,6 @@ public class DiceManager : MonoBehaviour
             targetedResult.Add(inputField.GetDiceValue());
         }
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ThrowTheDice();
-        }
-    }
-
     public void ThrowTheDice()
     {
         SetDicesInformation();
