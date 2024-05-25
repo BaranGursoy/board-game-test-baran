@@ -117,19 +117,13 @@ public class DiceManager : MonoBehaviour
 
     private InitialState SetInitialState()
     {
+        int x, y, z;
+        
         //Randomize X, Y, Z position in the bounding box
-        float x = transform.position.x + Random.Range(-transform.localScale.x / 2,
-                                                       transform.localScale.x / 2);
-        float y = transform.position.y + Random.Range(-transform.localScale.y / 2,
-                                                       transform.localScale.y / 2);
-        float z = transform.position.z + Random.Range(-transform.localScale.z / 2,
-                                                       transform.localScale.z / 2);
-        Vector3 position = transform.position;//new Vector3(x, y, z);
 
-        x = Random.Range(0, 360);
-        y = Random.Range(0, 360);
-        z = Random.Range(0, 360);
-        Quaternion rotation = Quaternion.identity;//Quaternion.Euler(x, y, z);
+        Vector3 position = transform.position + Random.insideUnitSphere;
+        
+        Quaternion rotation = Quaternion.identity;
 
         x = Random.Range(0, 5);
         y = Random.Range(0, 5);
