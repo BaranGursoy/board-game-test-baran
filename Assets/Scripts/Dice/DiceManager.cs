@@ -12,6 +12,8 @@ public class DiceManager : MonoBehaviour
     public GameObject dicePrefab;
     public MovementRecorder movementRecorder;
 
+    [SerializeField] private Transform playerTransform;
+
     private int _totalDiceCount;
     private int _stoppedDiceCount;
     private int _totalDiceResult;
@@ -135,7 +137,10 @@ public class DiceManager : MonoBehaviour
         int x, y, z;
         
         Vector3 position = transform.position;
-        
+
+        // Quaternion lookRotation = Quaternion.LookRotation(playerTransform.position - transform.position);
+        // Quaternion rotation = lookRotation;
+
         Quaternion rotation = Quaternion.identity;
 
         x = Random.Range(0, 5);
@@ -143,12 +148,14 @@ public class DiceManager : MonoBehaviour
         z = Random.Range(0, 5);
         Vector3 force = new Vector3(x, -y, z);
 
+        Vector3 calculatedFinalForce = (playerTransform.position - transform.position).normalized * force.magnitude;
+
         x = Random.Range(0, 10);
         y = Random.Range(0, 10);
         z = Random.Range(0, 10);
         Vector3 torque = new Vector3(x, y, z);
 
-        return new InitialState(position, rotation, force, torque);
+        return new InitialState(position, rotation, calculatedFinalForce, torque);
     }
 
     [Serializable]
