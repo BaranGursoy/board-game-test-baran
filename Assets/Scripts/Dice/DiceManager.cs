@@ -17,6 +17,8 @@ public class DiceManager : MonoBehaviour
     private int _totalDiceCount;
     private int _stoppedDiceCount;
     private int _totalDiceResult;
+
+    private Vector3 _spawnPointForDiceManager;
     
     public List<int> targetedResult = new List<int>();
     
@@ -33,9 +35,15 @@ public class DiceManager : MonoBehaviour
         {6, new Vector3(90, 0, 0)}
     };
     
-    private void Start()
+    private void Awake()
     {
         DiceStopped += CanPlayerMove;
+        TileManager.MapGenerationFinished += SetSpawnPoint;
+    }
+
+    private void SetSpawnPoint()
+    {
+        _spawnPointForDiceManager = TileManager.Instance.CalculateMiddlePoint();
     }
 
     private void CanPlayerMove(int diceResult)
@@ -135,11 +143,23 @@ public class DiceManager : MonoBehaviour
     private InitialState SetInitialState()
     {
         int x, y, z;
-        
-        Vector3 position = transform.position;
 
-        // Quaternion lookRotation = Quaternion.LookRotation(playerTransform.position - transform.position);
-        // Quaternion rotation = lookRotation;
+        transform.position = new Vector3(_spawnPointForDiceManager.x, transform.position.y, _spawnPointForDiceManager.z);
+        
+        Vector3 viewportThrowingPosition = Camera.main.WorldToViewportPoint(transform.position);
+        
+        if (viewportThrowingPosition.x < 0 || viewportThrowingPosition.x > 1 || 
+            viewportThrowingPosition.y < 0 || viewportThrowingPosition.y > 1)
+        {
+            viewportThrowingPosition.x = Mathf.Clamp01(viewportThrowingPosition.x);
+            viewportThrowingPosition.y = Mathf.Clamp01(viewportThrowingPosition.y);
+            
+            Vector3 newThrowingPosition = Camera.main.ViewportToWorldPoint(viewportThrowingPosition);
+            
+            newThrowingPosition.y = transform.position.y;
+            
+            transform.position = newThrowingPosition;
+        }
 
         Quaternion rotation = Quaternion.identity;
 
@@ -155,8 +175,9 @@ public class DiceManager : MonoBehaviour
         z = Random.Range(0, 10);
         Vector3 torque = new Vector3(x, y, z);
 
-        return new InitialState(position, rotation, calculatedFinalForce, torque);
+        return new InitialState(transform.position, rotation, calculatedFinalForce, torque);
     }
+
 
     [Serializable]
 

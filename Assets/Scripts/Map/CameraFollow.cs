@@ -1,32 +1,25 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private float screenEdgeBuffer = 0.1f;
-    [SerializeField] private float smoothSpeed = 0.125f;
-    
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private float smoothTime = 0.125f;
+
+    private Vector3 _velocity;
+
+    private Vector3 offset;
+
+    void Start()
+    {
+        offset = transform.position - playerTransform.position;
+    }
+
     void LateUpdate()
     {
-        if (player != null)
-        {
-            Vector3 playerViewportPosition = Camera.main.WorldToViewportPoint(player.position);
-
-            float offsetX = 0f;
-
-            if (playerViewportPosition.x < screenEdgeBuffer)
-            {
-                offsetX = playerViewportPosition.x - screenEdgeBuffer;
-            }
-            else if (playerViewportPosition.x > 1 - screenEdgeBuffer)
-            {
-                offsetX = playerViewportPosition.x - (1 - screenEdgeBuffer);
-            }
-
-            Vector3 desiredPosition = new Vector3(transform.position.x + offsetX, transform.position.y, transform.position.z);
-            
-            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-            transform.position = smoothedPosition;
-        }
+        Vector3 desiredPosition = playerTransform.position + offset;
+        desiredPosition.y = transform.position.y;
+        Vector3 smoothedPosition = Vector3.SmoothDamp(transform.position, desiredPosition, ref _velocity, smoothTime);
+        transform.position = smoothedPosition;
     }
 }
