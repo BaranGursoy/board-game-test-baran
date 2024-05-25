@@ -9,6 +9,7 @@ public class InputFieldHandler : MonoBehaviour
 {
     private int diceValue = 1;
     [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private TextMeshProUGUI inputFieldPlaceHolderTMP;
     public void LimitInputFieldValue(string inputFieldText)
     {
         if (inputFieldText is "-" or "+")
@@ -46,5 +47,11 @@ public class InputFieldHandler : MonoBehaviour
         }
 
         return diceValue;
+    }
+
+    public void SetPlaceHolderName(int index)
+    {
+        string placeHolderText = $"Dice {index + 1} Value";
+        inputFieldPlaceHolderTMP.text = placeHolderText;
     }
 }

@@ -8,6 +8,8 @@ public class InputFieldManager : MonoBehaviour
     public static InputFieldManager Instance;
     
     public List<InputFieldHandler> inputFields;
+
+    [SerializeField] private GameObject inputFieldPrefab;
     
     private void Awake()
     {
@@ -20,5 +22,12 @@ public class InputFieldManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    public void CreateInputField()
+    {
+        var createdInputField = Instantiate(inputFieldPrefab, transform).GetComponent<InputFieldHandler>();
+        createdInputField.SetPlaceHolderName(index: inputFields.Count);
+        inputFields.Add(createdInputField);
     }
 }

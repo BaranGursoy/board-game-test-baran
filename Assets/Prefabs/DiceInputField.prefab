@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 3144240663172716826}
+  inputFieldPlaceHolderTMP: {fileID: 4215630957742894367}
 --- !u!1 &1992619705967113331
 GameObject:
   m_ObjectHideFlags: 0
