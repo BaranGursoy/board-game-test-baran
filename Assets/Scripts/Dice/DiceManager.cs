@@ -73,6 +73,8 @@ public class DiceManager : MonoBehaviour
     }
     public void ThrowTheDice()
     {
+        ActionHandler.DiceRolled?.Invoke();
+        
         SetDicesInformation();
         GenerateDice(_totalDiceCount);
 

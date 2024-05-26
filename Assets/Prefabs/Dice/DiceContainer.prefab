@@ -155,7 +155,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &4570415756686924265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,6 +418,7 @@ MonoBehaviour:
   - faceDetector: {fileID: 99604931179623494}
     result: 6
   defaultFaceResult: -1
+  sentResult: 0
 --- !u!1 &2367636471571202579
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,15 +12,7 @@ public class MovementRecorder : MonoBehaviour
     [SerializeField] private List<RecordingData> recordingDataList;
     
     private Coroutine playback = null;
-    
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F11))
-        {
-            PlayRecording();
-        }
-    }
-    
+
     public void StartSimulation(List<GameObject> targets)
     {
         if (playback != null)

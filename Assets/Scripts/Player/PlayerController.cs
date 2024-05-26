@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
         }
         
         mapTiles[_playerTileIndex].StoppedOnTile();
+        ActionHandler.PlayerStopped?.Invoke();
     }
 
 }
