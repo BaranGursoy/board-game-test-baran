@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        TileManager.MapGenerationFinished += GetTileList;
-        DiceManager.PlayerCanMove += MovePlayer;
+        ActionHandler.MapGenerationFinished += GetTileList;
+        ActionHandler.PlayerCanMove += MovePlayer;
     }
 
     private void GetTileList()

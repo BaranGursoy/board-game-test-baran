@@ -87,7 +87,7 @@ public class RandomMapGenerator : IMapGenerator
             }
         }
         
-        TileManager.MapGenerationFinished?.Invoke();
+        ActionHandler.MapGenerationFinished?.Invoke();
     }
 
     private Vector3 NextPosition(Direction currentDirection, bool isCornerTile = false)

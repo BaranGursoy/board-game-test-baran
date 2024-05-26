@@ -6,9 +6,6 @@ using Random = UnityEngine.Random;
 
 public class DiceManager : MonoBehaviour
 {
-    public static Action<int> DiceStopped;
-    public static Action<int> PlayerCanMove;
-    
     public GameObject dicePrefab;
     public MovementRecorder movementRecorder;
 
@@ -37,8 +34,8 @@ public class DiceManager : MonoBehaviour
     
     private void Awake()
     {
-        DiceStopped += CanPlayerMove;
-        TileManager.MapGenerationFinished += SetSpawnPoint;
+        ActionHandler.DiceStopped += CanPlayerMove;
+        ActionHandler.MapGenerationFinished += SetSpawnPoint;
     }
 
     private void SetSpawnPoint()
@@ -53,7 +50,7 @@ public class DiceManager : MonoBehaviour
 
         if (_stoppedDiceCount == _totalDiceCount)
         {
-            PlayerCanMove?.Invoke(_totalDiceResult);
+            ActionHandler.PlayerCanMove?.Invoke(_totalDiceResult);
 
             _stoppedDiceCount = 0;
             _totalDiceResult = 0;

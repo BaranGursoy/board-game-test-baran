@@ -5,9 +5,7 @@ using UnityEngine;
 public class TileManager : MonoBehaviour
 {
     public static TileManager Instance;
-
-    public static Action MapGenerationFinished;
-
+    
     private void Awake()
     {
         if (Instance)

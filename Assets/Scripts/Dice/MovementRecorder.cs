@@ -103,7 +103,7 @@ public class MovementRecorder : MonoBehaviour
                 
                 if(recordingDataList[j].recordedAnimation[i].isNotMoving && !diceManager.diceDataList[j].diceLogic.sentResult)
                 {
-                    DiceManager.DiceStopped?.Invoke(diceManager.diceDataList[j].diceLogic.FindFaceResult());
+                    ActionHandler.DiceStopped?.Invoke(diceManager.diceDataList[j].diceLogic.FindFaceResult());
                     diceManager.diceDataList[j].diceLogic.sentResult = true;
                 }
             }
