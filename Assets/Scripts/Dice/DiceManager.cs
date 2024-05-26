@@ -160,6 +160,8 @@ public class DiceManager : MonoBehaviour
             transform.position = newThrowingPosition;
         }
 
+        transform.position += Random.insideUnitSphere;
+
         Quaternion rotation = Quaternion.identity;
 
         x = Random.Range(0, 5);
