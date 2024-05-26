@@ -5,13 +5,38 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    [SerializeField] private InventoryView inventoryView;
+
+    private int appleCount;
+    private int strawberryCount;
+    private int pearCount;
+    
     private void Awake()
     {
-        ActionHandler.SendItemToInventory += Test;
+        ActionHandler.SendItemToInventory += AddItemToInventory;
     }
 
-    private void Test(ItemType itemType, int quantity)
+    private void Start()
     {
-        Debug.Log($"Gained {Enum.GetName(typeof(ItemType),itemType)}, x{quantity}!");
+        inventoryView.UpdateAllInventoryUI(strawberryCount, pearCount, appleCount);
+    }
+
+    private void AddItemToInventory(ItemType itemType, int quantity)
+    {
+        switch (itemType)
+        {
+            case ItemType.Apple:
+                appleCount += quantity;
+                inventoryView.UpdateAppleCount(appleCount);
+                break;
+            case ItemType.Strawberry:
+                strawberryCount += quantity;
+                inventoryView.UpdateStrawberryCount(strawberryCount);
+                break;
+            case ItemType.Pear:
+                pearCount += quantity;
+                inventoryView.UpdatePearCount(pearCount);
+                break;
+        }
     }
 }
