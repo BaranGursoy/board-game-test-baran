@@ -14,7 +14,7 @@ public class InventoryAnimationController : MonoBehaviour
 
     private void Awake()
     {
-        ActionHandler.SendItemToInventory += PlayBounceAnimation;
+        ActionHandler.CurrencyReachedDestination += PlayBounceAnimation;
     }
 
     private void PlayBounceAnimation(ItemType itemType, int dummyQuantity)

@@ -22,8 +22,7 @@ public abstract class MapTile : MonoBehaviour
 
     protected void ItemSendCommonSteps()
     {
-        ActionHandler.SendItemToInventory?.Invoke(GetItemFromTile(), GetItemQuantity());
-        ActionHandler.SpawnParticles?.Invoke(GetItemFromTile(), transform.position + (transform.up / 2f));
+        ActionHandler.SpawnCurrency?.Invoke(GetItemFromTile(), transform.position + (transform.up / 2f), GetItemQuantity());
     }
 
     public void SetTileData(TileData data)

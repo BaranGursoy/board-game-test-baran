@@ -10,7 +10,7 @@ public class ParticlesManager : MonoBehaviour
     [SerializeField] private ParticleSystem strawberryParticles;
     private void Awake()
     {
-        ActionHandler.SpawnParticles += SpawnParticlesAtPosition;
+        //ActionHandler.SpawnCurrency += SpawnParticlesAtPosition;
     }
 
     private void SpawnParticlesAtPosition(ItemType itemType, Vector3 particleSpawnPosition)
