@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.Events;
 
 public static class ActionHandler
@@ -8,4 +9,5 @@ public static class ActionHandler
     public static UnityAction<int> DiceStopped;
     public static UnityAction<int> PlayerCanMove;
     public static UnityAction MapGenerationFinished;
+    public static UnityAction<ItemType, Vector3> SpawnParticles;
 }

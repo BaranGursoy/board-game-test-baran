@@ -7,7 +7,7 @@ using UnityEngine;
 public class InventoryView : MonoBehaviour
 {
     [SerializeField] private ItemTextPair[] itemTextPair;
-    
+
     public void UpdateQuantityOfItem(ItemType itemType, int quantity)
     {
         ItemTextPair itemToUpdate = Array.Find(itemTextPair, x => x.itemType == itemType);
