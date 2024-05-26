@@ -1,16 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private InventoryView inventoryView;
+    [SerializeField] private InventorySaver inventorySaver;
 
-    private int appleCount;
-    private int strawberryCount;
-    private int pearCount;
-    
+    private Dictionary<ItemType, int> inventoryData = new();
+
     private void Awake()
     {
         ActionHandler.SendItemToInventory += AddItemToInventory;
@@ -18,25 +16,37 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        inventoryView.UpdateAllInventoryUI(strawberryCount, pearCount, appleCount);
+        InitializeInventory();
+        inventoryView.UpdateAllInventoryUI(inventoryData);
+    }
+
+    private void InitializeInventory()
+    {
+        if (inventorySaver.SaveExists())
+        {
+            inventorySaver.LoadInventory(ref inventoryData);
+        }
+        else
+        {
+            ResetInventory();
+        }
     }
 
     private void AddItemToInventory(ItemType itemType, int quantity)
     {
-        switch (itemType)
+        inventoryData[itemType] += quantity;
+        inventoryView.UpdateQuantityOfItem(itemType, inventoryData[itemType]);
+
+        inventorySaver.SaveInventory(inventoryData);
+    }
+
+    private void ResetInventory()
+    {
+        inventorySaver.DeleteInventorySave();
+        inventoryData.Clear();
+        foreach (ItemType itemType in Enum.GetValues(typeof(ItemType)))
         {
-            case ItemType.Apple:
-                appleCount += quantity;
-                inventoryView.UpdateAppleCount(appleCount);
-                break;
-            case ItemType.Strawberry:
-                strawberryCount += quantity;
-                inventoryView.UpdateStrawberryCount(strawberryCount);
-                break;
-            case ItemType.Pear:
-                pearCount += quantity;
-                inventoryView.UpdatePearCount(pearCount);
-                break;
+            inventoryData.Add(itemType, 0);
         }
     }
 }

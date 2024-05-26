@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,29 +6,29 @@ using UnityEngine;
 
 public class InventoryView : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI strawberryTMP;
-    [SerializeField] private TextMeshProUGUI pearTMP;
-    [SerializeField] private TextMeshProUGUI appleTMP;
-
-    public void UpdateStrawberryCount(int strawberryCount)
-    {
-        strawberryTMP.text = $"x{strawberryCount}";
-    }
+    [SerializeField] private ItemTextPair[] itemTextPair;
     
-    public void UpdatePearCount(int pearCount)
+    public void UpdateQuantityOfItem(ItemType itemType, int quantity)
     {
-        pearTMP.text = $"x{pearCount}";
-    }
-    
-    public void UpdateAppleCount(int appleCount)
-    {
-        appleTMP.text = $"x{appleCount}";
+        ItemTextPair itemToUpdate = Array.Find(itemTextPair, x => x.itemType == itemType);
+        itemToUpdate.itemQuantityTMP.text = $"x{quantity}";
     }
 
-    public void UpdateAllInventoryUI(int strawberryCount, int pearCount, int appleCount)
+    public void UpdateAllInventoryUI(Dictionary<ItemType, int> itemDict)
     {
-        strawberryTMP.text = $"x{strawberryCount}";
-        pearTMP.text = $"x{pearCount}";
-        appleTMP.text = $"x{appleCount}";
+        foreach (ItemTextPair itemText in itemTextPair)
+        {
+            if(!itemDict.ContainsKey(itemText.itemType)) continue;
+            
+            itemText.itemQuantityTMP.text = $"x{itemDict[itemText.itemType]}";
+        }
     }
 }
+
+[Serializable]
+public struct ItemTextPair
+{
+    public ItemType itemType;
+    public TextMeshProUGUI itemQuantityTMP;
+}
+
