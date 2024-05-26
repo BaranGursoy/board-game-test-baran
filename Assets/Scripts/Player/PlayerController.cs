@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = endRotation;
         }
         
+        mapTiles[_playerTileIndex].StoppedOnTile();
     }
 
 }

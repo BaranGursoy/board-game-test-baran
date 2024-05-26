@@ -6,9 +6,38 @@ using UnityEngine;
 public abstract class MapTile : MonoBehaviour
 {
     protected TextMeshPro quantityTMP;
-    public abstract void SetTileData(TileData data);
+    protected TileData tileData;
 
-    private void Awake()
+    public abstract void StoppedOnTile();
+
+    protected ItemType GetItemFromTile()
+    {
+        return tileData.itemType;
+    }
+    
+    protected int GetItemQuantity()
+    {
+        return tileData.quantity;
+    }
+
+    protected void ItemSendCommonSteps()
+    {
+        ActionHandler.SendItemToInventory?.Invoke(GetItemFromTile(), GetItemQuantity());
+    }
+
+    public void SetTileData(TileData data)
+    {
+        tileData = data;
+        UpdateTileText();
+    }
+
+    protected void UpdateTileText()
+    {
+        if (!quantityTMP) return;
+        quantityTMP.text = $"x{tileData.quantity}";
+    }
+
+    protected void Awake()
     {
         quantityTMP = GetComponentInChildren<TextMeshPro>();
     }
