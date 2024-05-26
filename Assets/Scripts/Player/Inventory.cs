@@ -40,7 +40,7 @@ public class Inventory : MonoBehaviour
         inventorySaver.SaveInventory(inventoryData);
     }
 
-    private void ResetInventory()
+    public void ResetInventory()
     {
         inventorySaver.DeleteInventorySave();
         inventoryData.Clear();
@@ -48,5 +48,7 @@ public class Inventory : MonoBehaviour
         {
             inventoryData.Add(itemType, 0);
         }
+        
+        inventoryView.UpdateAllInventoryUI(inventoryData);
     }
 }
