@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private List<MapTile> mapTiles;
     private int _playerTileIndex = 0;
 
-    private void Start()
+    private void Awake()
     {
         TileManager.MapGenerationFinished += GetTileList;
         DiceManager.PlayerCanMove += MovePlayer;
@@ -31,18 +31,26 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < totalMoveCount; i++)
         {
+            Debug.Log("1");
             _playerTileIndex++;
             _playerTileIndex %= mapTiles.Count;
 
+            Debug.Log("2");
+
             Quaternion endRotation = transform.rotation;
 
+            
             if (mapTiles[_playerTileIndex] is CornerTile)
             {
                 transform.Rotate(0f, 90f, 0f);
                 endRotation = transform.rotation;
                 transform.Rotate(0f, -90f, 0f);
+                Debug.Log("3");
+
             }
             
+            Debug.Log("4");
+
             
             Vector3 startPosition = transform.position;
             Quaternion startRotation = transform.rotation;
@@ -79,6 +87,8 @@ public class PlayerController : MonoBehaviour
             
             transform.position = endPosition;
             transform.rotation = endRotation;
+            Debug.Log("5");
+
         }
         
     }
