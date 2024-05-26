@@ -950,6 +950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 543450652816917820}
   smoothTime: 0.125
+  _cameraTurnSpeed: 6
 --- !u!1 &982602844
 GameObject:
   m_ObjectHideFlags: 0
