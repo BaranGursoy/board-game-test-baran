@@ -26,6 +26,17 @@ public class PlayerMovementController : MonoBehaviour
         StartCoroutine(MoveCoroutine(totalMoveCount, forward));
     }
 
+    private bool FindIfCornerIsPassable()
+    {
+        return mapTiles[_playerTileIndex] is CornerTile foundCornerTile &&
+               (foundCornerTile.IsForward || foundCornerTile.IsStartingTile);
+    }
+    
+    private bool FindIfCornerIsNotDestination(int destinationTileIndex)
+    {
+       return mapTiles[_playerTileIndex] is CornerTile && mapTiles[destinationTileIndex] != mapTiles[_playerTileIndex];
+    }
+
     private IEnumerator MoveCoroutine(int totalMoveCount, bool forward)
     {
         int destinationTileIndex = LogDestinationTileNumber(totalMoveCount, forward);
@@ -46,7 +57,7 @@ public class PlayerMovementController : MonoBehaviour
             
             Quaternion endRotation = transform.rotation;
             
-            if (mapTiles[_playerTileIndex] is CornerTile foundCornerTile && (foundCornerTile.IsForward || foundCornerTile.IsStartingTile) || (mapTiles[_playerTileIndex] is CornerTile && mapTiles[destinationTileIndex] != mapTiles[_playerTileIndex]) )
+            if ( FindIfCornerIsPassable() || FindIfCornerIsNotDestination(destinationTileIndex))
             {
                 transform.Rotate(0f, 90f, 0f);
                 endRotation = transform.rotation;
