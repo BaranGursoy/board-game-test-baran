@@ -11,6 +11,7 @@ public class UIFlyCurrencyEffect : MonoBehaviour
     [SerializeField] private RectTransform currencyIcon;
     
     [SerializeField] private int currencyIconCount = 10;
+    [SerializeField] private float spawnDelay = 0.02f;
     
     [SerializeField] private RectTransform appleEndPos;
     [SerializeField] private RectTransform pearEndPos;
@@ -60,7 +61,7 @@ public class UIFlyCurrencyEffect : MonoBehaviour
             
             uiCurrency.SendCurrencyToPosition(itemType, GetTargetPositionForCurrency(itemType), quantity);
 
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(spawnDelay);
         }
     }
     
@@ -81,11 +82,27 @@ public class UIFlyCurrencyEffect : MonoBehaviour
 
     private void CheckForAllCurrenciesReachedDestination(ItemType itemType, int quantity)
     {
+        bool canDividePerfectly = quantity % _currencySpawnCount == 0;
+        int oneCurrencyToQuantity = quantity / _currencySpawnCount;
+        
+        // quantity 47 currencySpawnCount 11 = every time 4, last time 5
+        
         _reachedCurrencies++;
-
-        if (_reachedCurrencies >= _currencySpawnCount)
+        
+        if (_reachedCurrencies == _currencySpawnCount && !canDividePerfectly)
         {
-            ActionHandler.SendItemToInventory?.Invoke(itemType, quantity);
+            int leftToSend = quantity % _currencySpawnCount;
+            int lastToSendTotal = oneCurrencyToQuantity + leftToSend;
+            ActionHandler.SendItemToInventory?.Invoke(itemType, lastToSendTotal);
+        }
+
+        else
+        {
+            ActionHandler.SendItemToInventory?.Invoke(itemType, oneCurrencyToQuantity);
+        }
+        
+        if (_reachedCurrencies == _currencySpawnCount)
+        {
             _reachedCurrencies = 0;
         }
     }

@@ -93,4 +93,4 @@ MonoBehaviour:
   appleSprite: {fileID: 21300000, guid: c30332b8539a5284a9fafbdcb32a7892, type: 3}
   pearSprite: {fileID: 21300000, guid: 2825a6c51b1d9224b8b972806c9c3568, type: 3}
   strawberrySprite: {fileID: 21300000, guid: cb3c06339cd21954cbb885803f21004c, type: 3}
-  flyDuration: 0.8
+  flyDuration: 0.6

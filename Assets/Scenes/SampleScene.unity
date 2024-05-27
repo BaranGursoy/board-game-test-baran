@@ -1372,7 +1372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1962985146}
   currencyIcon: {fileID: 3235586636881153219, guid: e33e4423ed9956040a0baff4777bcec7, type: 3}
-  currencyIconCount: 10
+  currencyIconCount: 15
   appleEndPos: {fileID: 1895154022}
   pearEndPos: {fileID: 1511798630}
   strawberryEndPos: {fileID: 1855570822}
@@ -2077,7 +2077,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectsToPool:
   - {fileID: 1184352976344430670, guid: e33e4423ed9956040a0baff4777bcec7, type: 3}
-  initialPoolSize: 10
+  initialPoolSize: 15
 --- !u!4 &1126820831
 Transform:
   m_ObjectHideFlags: 0
