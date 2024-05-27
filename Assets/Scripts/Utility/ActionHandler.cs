@@ -11,7 +11,9 @@ public static class ActionHandler
     public static UnityAction PlayerStopped;
     public static UnityAction<int> DiceStopped;
     public static UnityAction<int> PlayerCanMove;
+    public static UnityAction PlayerTouchedTheBoard;
     public static UnityAction MapGenerationFinished;
     public static UnityAction<ItemType, Vector3, int> SpawnCurrency;
+    public static UnityAction PlayerStoppedOnItemTile;
     public static UnityAction<ItemType, int> CurrencyReachedDestination;
 }

@@ -22,6 +22,7 @@ public abstract class MapTile : MonoBehaviour
 
     protected void ItemSendCommonSteps()
     {
+        ActionHandler.PlayerStoppedOnItemTile?.Invoke();
         ActionHandler.SpawnCurrency?.Invoke(GetItemFromTile(), transform.position + (transform.up / 2f), GetItemQuantity());
     }
 

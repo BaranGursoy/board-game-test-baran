@@ -78,6 +78,8 @@ public class PlayerController : MonoBehaviour
             
             transform.position = endPosition;
             transform.rotation = endRotation;
+            
+            ActionHandler.PlayerTouchedTheBoard?.Invoke();
         }
         
         mapTiles[_playerTileIndex].StoppedOnTile();
