@@ -23,7 +23,6 @@ public class PlayerMovementController : MonoBehaviour
 
     private void MovePlayer(int totalMoveCount)
     {
-        Debug.Log($"Player moves {totalMoveCount} tiles");
         StartCoroutine(MoveCoroutine(totalMoveCount));
     }
 

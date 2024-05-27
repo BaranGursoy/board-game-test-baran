@@ -20,7 +20,6 @@ public class Dice : MonoBehaviour
     
     public void RotateDice(int alteredFaceResult)
     {
-        Debug.Log(defaultFaceResult);
         Vector3 rotationFromIdentity = DiceManager.RotationMatrix[defaultFaceResult];
 
         float inverseX = rotationFromIdentity.x == 0f ? 0f : 360f - rotationFromIdentity.x;
