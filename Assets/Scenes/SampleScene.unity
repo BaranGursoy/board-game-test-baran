@@ -2581,8 +2581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb55fa3408aa9749823376fd2ea4590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDimensionTileCount: 3
-  zDimensionTileCount: 3
+  xDimensionTileCount: 10
+  zDimensionTileCount: 10
   tileFactory: {fileID: 606109918}
   tileStartPoint: {fileID: 791753}
 --- !u!1 &1461817427
