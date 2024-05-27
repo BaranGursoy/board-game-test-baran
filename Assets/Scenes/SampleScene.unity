@@ -1727,8 +1727,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.5, y: 0}
-  m_SizeDelta: {x: -35, y: -14}
+  m_AnchoredPosition: {x: -8.15, y: 0.5}
+  m_SizeDelta: {x: -26.3, y: -11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &851839564
 MonoBehaviour:
@@ -1777,7 +1777,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 4.75
+  m_fontSize: 6.5
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2275,9 +2275,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ee6d26993667244970a09b9c09761f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToPool:
-  - {fileID: 1184352976344430670, guid: e33e4423ed9956040a0baff4777bcec7, type: 3}
-  initialPoolSize: 15
+  pools:
+  - prefabType: 0
+    prefab: {fileID: 1184352976344430670, guid: e33e4423ed9956040a0baff4777bcec7, type: 3}
+    size: 15
+  - prefabType: 1
+    prefab: {fileID: 1117821049029442084, guid: 1efa1ae91531dd942acea3f0ce42980d, type: 3}
+    size: 50
 --- !u!4 &1126820831
 Transform:
   m_ObjectHideFlags: 0

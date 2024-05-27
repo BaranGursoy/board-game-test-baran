@@ -15,6 +15,8 @@ public class DiceManager : MonoBehaviour
     private int _stoppedDiceCount;
     private int _totalDiceResult;
 
+    private bool _allDicesStopped = false;
+
     private Vector3 _spawnPointForDiceManager;
     
     public List<int> targetedResult = new List<int>();
@@ -53,9 +55,39 @@ public class DiceManager : MonoBehaviour
             ActionHandler.AllDicesStopped?.Invoke();
             ActionHandler.PlayerCanMove?.Invoke(_totalDiceResult, true); // True = movement is forwards
 
+            _allDicesStopped = true;
+
             _stoppedDiceCount = 0;
             _totalDiceResult = 0;
         }
+    }
+
+    private void FailSafeForFallingDices()
+    {
+        StartCoroutine(FailSafeForFallingDicesCoroutine());
+    }
+
+    private IEnumerator FailSafeForFallingDicesCoroutine()
+    {
+        float passedTime = 0f;
+
+        while (passedTime < 6f)
+        {
+            if(_allDicesStopped) yield break;
+            
+            passedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        int totalFaces = 0;
+            
+        foreach (var diceData in diceDataList)
+        {
+            totalFaces += diceData.diceLogic.FindFaceResult();
+        }
+
+        _totalDiceResult = totalFaces;
+        ActionHandler.PlayerCanMove?.Invoke(_totalDiceResult, true);
     }
 
     private void SetDicesInformation()
@@ -72,6 +104,8 @@ public class DiceManager : MonoBehaviour
     public void ThrowTheDice()
     {
         ActionHandler.HideDiceButton?.Invoke();
+
+        _allDicesStopped = false;
 
         SetDicesInformation();
         GenerateDice(_totalDiceCount);
@@ -98,32 +132,25 @@ public class DiceManager : MonoBehaviour
         }
 
         movementRecorder.PlayRecording();
+        FailSafeForFallingDices();
     }
 
     private void GenerateDice(int count)
     {
-        //Object pooling. Only generate dices we need
-        if(count > diceDataList.Count)
+        foreach (var diceData in diceDataList)
         {
-            int diceToGenerate = count - diceDataList.Count;
-            for (int i = 0; i < diceToGenerate; i++)
-            {
-                DiceData newDiceData = new DiceData(Instantiate(dicePrefab));
-                diceDataList.Add(newDiceData);
-            }
+            ObjectPooler.Instance.ReturnToPool(diceData.diceLogic.transform.parent.gameObject, PrefabType.Dice);
         }
-        //Otherwise, just teleport the dice far away from the arena.
-        //We can fetch them later if we want
-        else if(count < diceDataList.Count)
+        
+        diceDataList.Clear();
+        
+        for (int i = 0; i < count; i++)
         {
-            int diceToDispose = diceDataList.Count - count;
-            for (int i = diceDataList.Count - diceToDispose - 1;
-                     i < diceDataList.Count; i++)
-            {
-                diceDataList[i].diceObject.transform.position = Vector3.down * 10000;
-            }
+            Vector3 farAwayPos = Vector3.down * 1000f;
+            GameObject newDice = ObjectPooler.Instance.SpawnFromPool(PrefabType.Dice, farAwayPos, Quaternion.identity);
+            DiceData newDiceData = new DiceData(newDice);
+            diceDataList.Add(newDiceData);
         }
-
         //Set the position and rotation
         for (int i = 0; i < count; i++)
         {

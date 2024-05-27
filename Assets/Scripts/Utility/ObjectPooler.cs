@@ -3,9 +3,16 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-    private Dictionary<string, Queue<GameObject>> objectPoolDictionary;
-    public List<GameObject> objectsToPool;
-    public int initialPoolSize = 10;
+    [System.Serializable]
+    public class Pool
+    {
+        public PrefabType prefabType;
+        public GameObject prefab;
+        public int size;
+    }
+
+    public List<Pool> pools;
+    private Dictionary<PrefabType, Queue<GameObject>> objectPoolDictionary;
     public static ObjectPooler Instance;
 
     private void Awake()
@@ -20,53 +27,41 @@ public class ObjectPooler : MonoBehaviour
             return;
         }
 
-        objectPoolDictionary = new Dictionary<string, Queue<GameObject>>();
+        objectPoolDictionary = new Dictionary<PrefabType, Queue<GameObject>>();
 
-        foreach (GameObject obj in objectsToPool)
+        foreach (Pool pool in pools)
         {
-            CreateObjectPool(obj.name);
+            CreateObjectPool(pool);
         }
     }
 
-    private void CreateObjectPool(string objectType)
+    private void CreateObjectPool(Pool pool)
     {
         Queue<GameObject> objectPool = new Queue<GameObject>();
 
-        for (int i = 0; i < initialPoolSize; i++)
+        for (int i = 0; i < pool.size; i++)
         {
-            GameObject obj = Instantiate(GetObjectPrefab(objectType), transform);
+            GameObject obj = Instantiate(pool.prefab, transform);
             obj.SetActive(false);
             objectPool.Enqueue(obj);
         }
 
-        objectPoolDictionary.Add(objectType, objectPool);
+        objectPoolDictionary.Add(pool.prefabType, objectPool);
     }
 
-    private GameObject GetObjectPrefab(string objectType)
+    public GameObject SpawnFromPool(PrefabType prefabType, Vector3 position, Quaternion rotation)
     {
-        foreach (GameObject obj in objectsToPool)
+        if (!objectPoolDictionary.ContainsKey(prefabType))
         {
-            if (obj.name == objectType)
-            {
-                return obj;
-            }
-        }
-        return null;
-    }
-
-    public GameObject SpawnFromPool(string objectType, Vector3 position, Quaternion rotation)
-    {
-        if (!objectPoolDictionary.ContainsKey(objectType))
-        {
-            Debug.LogWarning("Object type does not exist");
+            Debug.LogWarning("Prefab type does not exist");
             return null;
         }
 
-        Queue<GameObject> objectPool = objectPoolDictionary[objectType];
+        Queue<GameObject> objectPool = objectPoolDictionary[prefabType];
 
         if (objectPool.Count == 0)
         {
-            GameObject obj = Instantiate(GetObjectPrefab(objectType), position, rotation);
+            GameObject obj = Instantiate(GetObjectPrefab(prefabType), position, rotation);
             return obj;
         }
         else
@@ -79,14 +74,37 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    public void ReturnToPool(GameObject obj)
+    private GameObject GetObjectPrefab(PrefabType prefabType)
+    {
+        foreach (Pool pool in pools)
+        {
+            if (pool.prefabType == prefabType)
+            {
+                return pool.prefab;
+            }
+        }
+        return null;
+    }
+
+    public void ReturnToPool(GameObject obj, PrefabType prefabType)
     {
         obj.SetActive(false);
 
-        string objectName = obj.name.Split('(')[0];
-        
-        Queue<GameObject> objectPool = objectPoolDictionary[objectName];
+        if (!objectPoolDictionary.ContainsKey(prefabType))
+        {
+            Debug.LogWarning("Object doesn't match any prefab type in the pool");
+            Destroy(obj);
+            return;
+        }
+
+        Queue<GameObject> objectPool = objectPoolDictionary[prefabType];
         objectPool.Enqueue(obj);
         obj.transform.SetParent(transform);
     }
+}
+
+public enum PrefabType
+{
+    CurrencySprite,
+    Dice
 }

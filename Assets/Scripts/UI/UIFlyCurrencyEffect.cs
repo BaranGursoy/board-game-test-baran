@@ -49,7 +49,7 @@ public class UIFlyCurrencyEffect : MonoBehaviour
         for (int i = 0; i < _currencySpawnCount; i++)
         {
             GameObject currency =
-                ObjectPooler.Instance.SpawnFromPool(currencyIcon.gameObject.name, localPosition, Quaternion.identity);
+                ObjectPooler.Instance.SpawnFromPool(PrefabType.CurrencySprite, localPosition, Quaternion.identity);
             
             currency.transform.SetParent(transform);
 

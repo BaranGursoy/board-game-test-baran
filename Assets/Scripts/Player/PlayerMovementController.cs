@@ -35,7 +35,6 @@ public class PlayerMovementController : MonoBehaviour
             if (forward)
             {
                 _playerTileIndex++;
-
             }
 
             else
@@ -47,7 +46,7 @@ public class PlayerMovementController : MonoBehaviour
             
             Quaternion endRotation = transform.rotation;
             
-            if (mapTiles[_playerTileIndex] is CornerTile { IsForward: true } || (mapTiles[_playerTileIndex] is CornerTile && mapTiles[destinationTileIndex] != mapTiles[_playerTileIndex]) )
+            if (mapTiles[_playerTileIndex] is CornerTile foundCornerTile && (foundCornerTile.IsForward || foundCornerTile.IsStartingTile) || (mapTiles[_playerTileIndex] is CornerTile && mapTiles[destinationTileIndex] != mapTiles[_playerTileIndex]) )
             {
                 transform.Rotate(0f, 90f, 0f);
                 endRotation = transform.rotation;
