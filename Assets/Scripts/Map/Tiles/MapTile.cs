@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public abstract class MapTile : MonoBehaviour
 {
-    protected TextMeshPro quantityTMP;
+    [SerializeField] private TextMeshPro quantityTMP;
+    [SerializeField] private TextMeshPro tileNumberTMP;
     protected TileData tileData;
 
     public abstract void StoppedOnTile();
@@ -32,15 +31,15 @@ public abstract class MapTile : MonoBehaviour
         UpdateTileText();
     }
 
+    public void SetTileNumber(int tileNumber)
+    {
+        tileNumberTMP.text = tileNumber.ToString();
+    }
+
     protected void UpdateTileText()
     {
         if (!quantityTMP) return;
         quantityTMP.text = $"x{tileData.quantity}";
-    }
-
-    protected void Awake()
-    {
-        quantityTMP = GetComponentInChildren<TextMeshPro>();
     }
 }
 

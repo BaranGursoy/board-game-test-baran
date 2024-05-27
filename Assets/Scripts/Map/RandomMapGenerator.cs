@@ -44,6 +44,7 @@ public class RandomMapGenerator : IMapGenerator
             TileData startCornerTileData = CreateCornerTileData();
             MapTile firstCreatedTile = _tileFactory.CreateTile(startCornerTileData, _tileStartPoint.position, Vector3.zero, _tileParentTransform);
             tileList.Add(firstCreatedTile);
+            firstCreatedTile.SetTileNumber(tileList.Count);
         }
         
         for (int i = 0; i < 4; i++)
@@ -73,10 +74,9 @@ public class RandomMapGenerator : IMapGenerator
             for (int j = 0; j < currentDimension; j++)
             {
                 TileData tileData = CreateRandomTileData();
-
-                
                 MapTile createdTile = _tileFactory.CreateTile(tileData, NextPosition(currentDirection), currentRotationVector, _tileParentTransform);
                 tileList.Add(createdTile);
+                createdTile.SetTileNumber(tileList.Count);
             }
 
             if (i < 3)
@@ -84,6 +84,7 @@ public class RandomMapGenerator : IMapGenerator
                 TileData cornerTileData = CreateCornerTileData();
                 MapTile cornerTile = _tileFactory.CreateTile(cornerTileData, NextPosition(currentDirection, isCornerTile:true), currentRotationVector, _tileParentTransform);
                 tileList.Add(cornerTile);
+                cornerTile.SetTileNumber(tileList.Count);
             }
         }
         

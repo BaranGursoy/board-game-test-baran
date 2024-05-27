@@ -28,6 +28,8 @@ public class PlayerMovementController : MonoBehaviour
 
     private IEnumerator MoveCoroutine(int totalMoveCount)
     {
+        LogDestinationTileNumber(totalMoveCount);
+        
         for (int i = 0; i < totalMoveCount; i++)
         {
             _playerTileIndex++;
@@ -83,6 +85,13 @@ public class PlayerMovementController : MonoBehaviour
         
         mapTiles[_playerTileIndex].StoppedOnTile();
         ActionHandler.PlayerStopped?.Invoke();
+    }
+
+    private void LogDestinationTileNumber(int totalMoveCount)
+    {
+        int destinationTileNumber = (_playerTileIndex + totalMoveCount + 1) % mapTiles.Count;
+
+        Debug.Log($"Player will reach to tile number {destinationTileNumber}");
     }
 
 }
