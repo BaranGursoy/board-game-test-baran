@@ -5,6 +5,9 @@ public static class ActionHandler
 {
     public static UnityAction<ItemType, int> SendItemToInventory;
     public static UnityAction DiceRolled;
+    public static UnityAction FirstDiceTouchedTheFloor;
+    public static UnityAction DiceTouchedTheFloor;
+    public static UnityAction AllDicesStopped;
     public static UnityAction PlayerStopped;
     public static UnityAction<int> DiceStopped;
     public static UnityAction<int> PlayerCanMove;

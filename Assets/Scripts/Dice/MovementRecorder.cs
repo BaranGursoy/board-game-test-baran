@@ -94,6 +94,7 @@ public class MovementRecorder : MonoBehaviour
                 
                 if(recordingDataList[j].recordedAnimation[i].isContactWithArena)
                 {
+                    ActionHandler.DiceTouchedTheFloor?.Invoke();
                     diceManager.diceDataList[j].diceInteraction.PlaySoundRollLow();
                 }
                 if (recordingDataList[j].recordedAnimation[i].isContactWithDice)

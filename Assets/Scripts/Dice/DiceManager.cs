@@ -50,6 +50,7 @@ public class DiceManager : MonoBehaviour
 
         if (_stoppedDiceCount == _totalDiceCount)
         {
+            ActionHandler.AllDicesStopped?.Invoke();
             ActionHandler.PlayerCanMove?.Invoke(_totalDiceResult);
 
             _stoppedDiceCount = 0;

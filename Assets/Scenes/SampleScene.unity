@@ -1373,6 +1373,7 @@ MonoBehaviour:
   canvas: {fileID: 1962985146}
   currencyIcon: {fileID: 3235586636881153219, guid: e33e4423ed9956040a0baff4777bcec7, type: 3}
   currencyIconCount: 15
+  spawnDelay: 0.02
   appleEndPos: {fileID: 1895154022}
   pearEndPos: {fileID: 1511798630}
   strawberryEndPos: {fileID: 1855570822}
@@ -1820,6 +1821,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1916,6 +1918,52 @@ MonoBehaviour:
   playerTransform: {fileID: 543450652816917820}
   smoothTime: 0.125
   _cameraTurnSpeed: 6
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb0a7822e59a3b4ba94eb2479edc40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.6
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.00737381
+      inSlope: 0.4935258
+      outSlope: 0.4935258
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.13809524
+      value: 0.07552738
+      inSlope: -0.3212576
+      outSlope: -0.3212576
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.09397551
+    - serializedVersion: 3
+      time: 0.99951524
+      value: 0.0058928207
+      inSlope: -0.080836944
+      outSlope: -0.080836944
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &982602844
 GameObject:
   m_ObjectHideFlags: 0
