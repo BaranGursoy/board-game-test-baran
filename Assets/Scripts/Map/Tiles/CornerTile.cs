@@ -18,8 +18,8 @@ public class CornerTile : MapTile
 
     private void Start()
     {
-        goForward = Random.Range(0, 2) == 0;
-        moveTileCount = Random.Range(1, 7);
+        goForward = false;//Random.Range(0, 2) == 0;
+        moveTileCount = 5;//Random.Range(1, 7);
 
         string directionName = goForward ? "forward" : "backward";
         

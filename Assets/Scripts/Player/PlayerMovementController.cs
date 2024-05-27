@@ -26,7 +26,7 @@ public class PlayerMovementController : MonoBehaviour
         StartCoroutine(MoveCoroutine(totalMoveCount, forward));
     }
 
-    private bool FindIfCornerIsPassable()
+    private bool FindIfCornerAndIsPassable()
     {
         return mapTiles[_playerTileIndex] is CornerTile foundCornerTile &&
                (foundCornerTile.IsForward || foundCornerTile.IsStartingTile);
@@ -37,10 +37,15 @@ public class PlayerMovementController : MonoBehaviour
        return mapTiles[_playerTileIndex] is CornerTile && mapTiles[destinationTileIndex] != mapTiles[_playerTileIndex];
     }
 
+    private bool IfCornerIsDestinationAndIsStart(int destinationTileIndex)
+    {
+        return mapTiles[_playerTileIndex] is CornerTile cornerTile && mapTiles[destinationTileIndex] == mapTiles[_playerTileIndex] && cornerTile.IsStartingTile;
+    }
+
     private IEnumerator MoveCoroutine(int totalMoveCount, bool forward)
     {
         int destinationTileIndex = LogDestinationTileNumber(totalMoveCount, forward);
-        
+
         for (int i = 0; i < totalMoveCount; i++)
         {
             if (forward)
@@ -51,17 +56,24 @@ public class PlayerMovementController : MonoBehaviour
             else
             {
                 _playerTileIndex--;
+
+                if (_playerTileIndex == -1)
+                {
+                    _playerTileIndex = mapTiles.Count - 1;
+                }
             }
             
             _playerTileIndex %= mapTiles.Count;
             
             Quaternion endRotation = transform.rotation;
             
-            if ( FindIfCornerIsPassable() || FindIfCornerIsNotDestination(destinationTileIndex))
+            if ((FindIfCornerAndIsPassable() || FindIfCornerIsNotDestination(destinationTileIndex)) && !IfCornerIsDestinationAndIsStart(destinationTileIndex) )
             {
-                transform.Rotate(0f, 90f, 0f);
+                float multiplier = forward ? 1f : -1f;
+                
+                transform.Rotate(0f, 90f * multiplier, 0f);
                 endRotation = transform.rotation;
-                transform.Rotate(0f, -90f, 0f);
+                transform.Rotate(0f, -90f * multiplier, 0f);
             }
             
             Vector3 startPosition = transform.position;
@@ -117,8 +129,17 @@ public class PlayerMovementController : MonoBehaviour
         {
             totalMoveCount *= -1;
         }
-        
-        int destinationTileNumber = (_playerTileIndex + totalMoveCount + 1) % mapTiles.Count;
+
+        int destinationIndex = _playerTileIndex + totalMoveCount;
+
+        if (destinationIndex <= -1)
+        {
+            destinationIndex = mapTiles.Count + destinationIndex;
+            Debug.Log($"Player will reach to tile number {destinationIndex + 1}");
+            return destinationIndex;
+        }
+
+        int destinationTileNumber = (destinationIndex + 1) % mapTiles.Count;
 
         Debug.Log($"Player will reach to tile number {destinationTileNumber}");
 

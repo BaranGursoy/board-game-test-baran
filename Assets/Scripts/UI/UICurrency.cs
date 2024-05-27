@@ -48,7 +48,7 @@ public class UICurrency : MonoBehaviour
 
       while (passedTime <= flyDuration)
       {
-         currencyRectTransform.transform.position = Vector3.Lerp(startingPosition, endPosition, passedTime / flyDuration);
+         currencyRectTransform.transform.position = Vector3.Slerp(startingPosition, endPosition, passedTime / flyDuration);
          
          passedTime += Time.deltaTime;
 

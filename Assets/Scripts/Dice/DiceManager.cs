@@ -188,13 +188,16 @@ public class DiceManager : MonoBehaviour
             transform.position = newThrowingPosition;
         }
 
-        transform.position += Random.insideUnitSphere;
+        Vector3 spawnPosition = transform.position + Random.insideUnitSphere;
+        spawnPosition.y = transform.position.y;
+        
+        transform.position = spawnPosition;
 
         Quaternion rotation = Quaternion.identity;
 
-        x = Random.Range(0, 5);
-        y = Random.Range(0, 5);
-        z = Random.Range(0, 5);
+        x = Random.Range(1, 5);
+        y = Random.Range(1, 5);
+        z = Random.Range(1, 5);
         Vector3 force = new Vector3(x, -y, z);
 
         Vector3 calculatedFinalForce = (playerTransform.position - transform.position).normalized * force.magnitude;

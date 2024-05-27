@@ -8,8 +8,7 @@ public class UIFlyCurrencyEffect : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
     private Camera _mainCamera;
-    [SerializeField] private RectTransform currencyIcon;
-    
+ 
     [SerializeField] private int currencyIconCount = 10;
     [SerializeField] private float spawnDelay = 0.02f;
     
@@ -84,8 +83,6 @@ public class UIFlyCurrencyEffect : MonoBehaviour
     {
         bool canDividePerfectly = quantity % _currencySpawnCount == 0;
         int oneCurrencyToQuantity = quantity / _currencySpawnCount;
-        
-        // quantity 47 currencySpawnCount 11 = every time 4, last time 5
         
         _reachedCurrencies++;
         
