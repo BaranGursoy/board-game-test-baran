@@ -103,6 +103,7 @@ public class UIFlyCurrencyEffect : MonoBehaviour
         
         if (_reachedCurrencies == _currencySpawnCount)
         {
+            ActionHandler.AllCurrenciesReachedInventory?.Invoke();
             _reachedCurrencies = 0;
         }
     }

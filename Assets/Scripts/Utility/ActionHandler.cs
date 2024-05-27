@@ -16,4 +16,5 @@ public static class ActionHandler
     public static UnityAction<ItemType, Vector3, int> SpawnCurrency;
     public static UnityAction PlayerStoppedOnItemTile;
     public static UnityAction<ItemType, int> CurrencyReachedDestination;
+    public static UnityAction AllCurrenciesReachedInventory;
 }
