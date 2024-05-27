@@ -43,6 +43,14 @@ public class RandomMapGenerator : IMapGenerator
         {
             TileData startCornerTileData = CreateCornerTileData();
             MapTile firstCreatedTile = _tileFactory.CreateTile(startCornerTileData, _tileStartPoint.position, Vector3.zero, _tileParentTransform);
+            
+            CornerTile startCornerTile = firstCreatedTile as CornerTile;
+
+            if (startCornerTile)
+            {
+                startCornerTile.SetAsStartingTile();
+            }
+
             tileList.Add(firstCreatedTile);
             firstCreatedTile.SetTileNumber(tileList.Count);
         }

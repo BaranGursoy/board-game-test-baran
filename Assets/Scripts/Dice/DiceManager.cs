@@ -51,7 +51,7 @@ public class DiceManager : MonoBehaviour
         if (_stoppedDiceCount == _totalDiceCount)
         {
             ActionHandler.AllDicesStopped?.Invoke();
-            ActionHandler.PlayerCanMove?.Invoke(_totalDiceResult);
+            ActionHandler.PlayerCanMove?.Invoke(_totalDiceResult, true); // True = movement is forwards
 
             _stoppedDiceCount = 0;
             _totalDiceResult = 0;
@@ -71,8 +71,8 @@ public class DiceManager : MonoBehaviour
     }
     public void ThrowTheDice()
     {
-        ActionHandler.DiceRolled?.Invoke();
-        
+        ActionHandler.HideDiceButton?.Invoke();
+
         SetDicesInformation();
         GenerateDice(_totalDiceCount);
 

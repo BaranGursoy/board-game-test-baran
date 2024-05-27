@@ -21,23 +21,33 @@ public class PlayerMovementController : MonoBehaviour
         mapTiles = TileManager.Instance.mapGenerator.GetTileList();
     }
 
-    private void MovePlayer(int totalMoveCount)
+    private void MovePlayer(int totalMoveCount, bool forward = true)
     {
-        StartCoroutine(MoveCoroutine(totalMoveCount));
+        StartCoroutine(MoveCoroutine(totalMoveCount, forward));
     }
 
-    private IEnumerator MoveCoroutine(int totalMoveCount)
+    private IEnumerator MoveCoroutine(int totalMoveCount, bool forward)
     {
-        LogDestinationTileNumber(totalMoveCount);
+        LogDestinationTileNumber(totalMoveCount, forward);
         
         for (int i = 0; i < totalMoveCount; i++)
         {
-            _playerTileIndex++;
+            if (forward)
+            {
+                _playerTileIndex++;
+
+            }
+
+            else
+            {
+                _playerTileIndex--;
+            }
+            
             _playerTileIndex %= mapTiles.Count;
             
             Quaternion endRotation = transform.rotation;
             
-            if (mapTiles[_playerTileIndex] is CornerTile)
+            if (mapTiles[_playerTileIndex] is CornerTile { IsForward: true })
             {
                 transform.Rotate(0f, 90f, 0f);
                 endRotation = transform.rotation;
@@ -84,11 +94,20 @@ public class PlayerMovementController : MonoBehaviour
         }
         
         mapTiles[_playerTileIndex].StoppedOnTile();
-        ActionHandler.PlayerStopped?.Invoke();
+
+        if (mapTiles[_playerTileIndex] is not CornerTile cornerTile || cornerTile.IsStartingTile)
+        {
+            ActionHandler.PlayerStopped?.Invoke();
+        }
     }
 
-    private void LogDestinationTileNumber(int totalMoveCount)
+    private void LogDestinationTileNumber(int totalMoveCount, bool forward)
     {
+        if (!forward)
+        {
+            totalMoveCount *= -1;
+        }
+        
         int destinationTileNumber = (_playerTileIndex + totalMoveCount + 1) % mapTiles.Count;
 
         Debug.Log($"Player will reach to tile number {destinationTileNumber}");

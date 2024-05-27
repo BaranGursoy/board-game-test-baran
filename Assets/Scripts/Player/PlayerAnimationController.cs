@@ -21,7 +21,7 @@ public class PlayerAnimationController : MonoBehaviour
         playerAnimator.Play(Idle);
     }
 
-    private void PlayJumpingAnimation(int dummy)
+    private void PlayJumpingAnimation(int dummyTileCount, bool dummyForwards)
     {
         playerAnimator.Play(Jumping);
     }
