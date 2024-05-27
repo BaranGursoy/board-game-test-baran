@@ -139,7 +139,7 @@ public class DiceManager : MonoBehaviour
     {
         foreach (var diceData in diceDataList)
         {
-            ObjectPooler.Instance.ReturnToPool(diceData.diceLogic.transform.parent.gameObject, PrefabType.Dice);
+            ObjectPooler.Instance.ReturnToPool(diceData.diceObject, PrefabType.Dice);
         }
         
         diceDataList.Clear();
