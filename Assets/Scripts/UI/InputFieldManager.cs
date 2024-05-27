@@ -35,13 +35,23 @@ public class InputFieldManager : MonoBehaviour
         }
         
         inputFields.Clear();
-        
-        for (int i = 0; i < _dropdownMenu.value + 1; i++)
+
+        if (_dropdownMenu.value == 0)
         {
-            var createdInputField = Instantiate(inputFieldPrefab, transform).GetComponent<InputFieldHandler>();
-            createdInputField.SetPlaceHolderName(index: inputFields.Count);
-            inputFields.Add(createdInputField);
+            CreateInputField();
+        }
+        
+        for (int i = 0; i < _dropdownMenu.value; i++)
+        {
+            CreateInputField();
         }
       
+    }
+
+    private void CreateInputField()
+    {
+        var createdInputField = Instantiate(inputFieldPrefab, transform).GetComponent<InputFieldHandler>();
+        createdInputField.SetPlaceHolderName(index: inputFields.Count);
+        inputFields.Add(createdInputField);
     }
 }

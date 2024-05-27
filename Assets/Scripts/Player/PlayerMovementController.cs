@@ -28,7 +28,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private IEnumerator MoveCoroutine(int totalMoveCount, bool forward)
     {
-        LogDestinationTileNumber(totalMoveCount, forward);
+        int destinationTileIndex = LogDestinationTileNumber(totalMoveCount, forward);
         
         for (int i = 0; i < totalMoveCount; i++)
         {
@@ -47,7 +47,7 @@ public class PlayerMovementController : MonoBehaviour
             
             Quaternion endRotation = transform.rotation;
             
-            if (mapTiles[_playerTileIndex] is CornerTile { IsForward: true })
+            if (mapTiles[_playerTileIndex] is CornerTile { IsForward: true } || (mapTiles[_playerTileIndex] is CornerTile && mapTiles[destinationTileIndex] != mapTiles[_playerTileIndex]) )
             {
                 transform.Rotate(0f, 90f, 0f);
                 endRotation = transform.rotation;
@@ -101,7 +101,7 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    private void LogDestinationTileNumber(int totalMoveCount, bool forward)
+    private int LogDestinationTileNumber(int totalMoveCount, bool forward)
     {
         if (!forward)
         {
@@ -111,6 +111,8 @@ public class PlayerMovementController : MonoBehaviour
         int destinationTileNumber = (_playerTileIndex + totalMoveCount + 1) % mapTiles.Count;
 
         Debug.Log($"Player will reach to tile number {destinationTileNumber}");
+
+        return destinationTileNumber - 1;
     }
 
 }

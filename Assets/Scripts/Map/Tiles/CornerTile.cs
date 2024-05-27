@@ -28,6 +28,8 @@ public class CornerTile : MapTile
 
     public override void StoppedOnTile()
     {
+        if(isStartingTile) return;
+        
         StartCoroutine(StoppedOnCornerTileCoroutine());
     }
 
