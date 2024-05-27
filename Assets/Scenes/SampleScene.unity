@@ -190,8 +190,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -33.190582, y: -56.520996}
-  m_SizeDelta: {x: 66.381, y: 28.4427}
+  m_AnchoredPosition: {x: -31.4287, y: -53.658}
+  m_SizeDelta: {x: 62.8573, y: 22.7167}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9308363
 MonoBehaviour:
@@ -541,8 +541,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -28.9, y: -19.864}
-  m_SizeDelta: {x: 74.9094, y: 30}
+  m_AnchoredPosition: {x: -18.5, y: -19.865}
+  m_SizeDelta: {x: 58.555, y: 23.4502}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &302985936
 MonoBehaviour:
@@ -1777,7 +1777,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8.05
+  m_fontSize: 4.75
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1911,7 +1911,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9.7
+  m_fontSize: 9.1
   m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2921,8 +2921,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -78.6997, y: -19.8645}
-  m_SizeDelta: {x: 157.3994, y: 35.4448}
+  m_AnchoredPosition: {x: -68.63095, y: -19.864502}
+  m_SizeDelta: {x: 137.2619, y: 35.4448}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1629982646
 MonoBehaviour:
@@ -2983,7 +2983,7 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
+  m_ChildControlWidth: 1
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
@@ -3601,7 +3601,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 400, y: 300}
+  m_ReferenceResolution: {x: 300, y: 225}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -3696,7 +3696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3195576893361215777, guid: 3daaf4d242ecfa347ac75865bbb7365a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 45.3644
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3195576893361215777, guid: 3daaf4d242ecfa347ac75865bbb7365a, type: 3}
       propertyPath: m_SizeDelta.y
@@ -3931,7 +3931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5308742983114048202, guid: 3c319531fd1029040be1749f3637c6f6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 45.3644
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5308742983114048202, guid: 3c319531fd1029040be1749f3637c6f6, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4032,7 +4032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6752812327095626013, guid: c056fd030ff640143bba6d3dbe7fe86b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 45.3644
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6752812327095626013, guid: c056fd030ff640143bba6d3dbe7fe86b, type: 3}
       propertyPath: m_SizeDelta.y
