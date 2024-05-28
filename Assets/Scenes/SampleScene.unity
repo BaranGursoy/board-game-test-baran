@@ -300,14 +300,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 057aa18c94131d9469c524ee3f29613b, type: 2}
     - target: {fileID: 7184215278715566050, guid: 561cff9c793666f49a7c7e506ff5e183, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7184215278715566050, guid: 561cff9c793666f49a7c7e506ff5e183, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7184215278715566050, guid: 561cff9c793666f49a7c7e506ff5e183, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -2117,6 +2109,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1157331632 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7184215278715566050, guid: 561cff9c793666f49a7c7e506ff5e183, type: 3}
+  m_PrefabInstance: {fileID: 58950457}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1171719920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,10 +2578,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb55fa3408aa9749823376fd2ea4590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDimensionTileCount: 10
-  zDimensionTileCount: 10
+  xDimensionTileCount: 100
+  zDimensionTileCount: 100
   tileFactory: {fileID: 606109918}
   tileStartPoint: {fileID: 791753}
+  floorTransform: {fileID: 1157331632}
+  sealingTransform: {fileID: 1625753427693159705}
 --- !u!1 &1461817427
 GameObject:
   m_ObjectHideFlags: 0
