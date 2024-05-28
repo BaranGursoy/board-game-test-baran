@@ -57,6 +57,7 @@ public class UIFlyCurrencyEffect : MonoBehaviour
             uiCurrency.SetCurrencySprite(itemType);
             
             uiCurrency.RectTransform.localPosition = localPosition;
+            uiCurrency.RectTransform.localScale = new Vector3(0.27f, 0.27f, 0.27f);
             
             uiCurrency.SendCurrencyToPosition(itemType, GetTargetPositionForCurrency(itemType), quantity);
 
