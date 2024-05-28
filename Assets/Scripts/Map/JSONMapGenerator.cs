@@ -23,6 +23,6 @@ public class JSONMapGenerator : MonoBehaviour, IMapGenerator
 
     private void GenerateMapFromJSON(string s)
     {
-       //
+       //This can be extendable to JSON version, I did a random map generation, but since I used an interface JSON version can be implemented easily.
     }
 }

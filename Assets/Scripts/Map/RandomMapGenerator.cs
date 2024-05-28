@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RandomMapGenerator : IMapGenerator
 {
-    [SerializeField] private List<MapTile> tileList = new List<MapTile>();
+    private List<MapTile> tileList = new List<MapTile>();
 
     private int _xDimension;
     private int _zDimension;

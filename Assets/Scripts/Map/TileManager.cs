@@ -18,11 +18,16 @@ public class TileManager : MonoBehaviour
             Instance = this;
         }
     }
-
-    [SerializeField] private int xDimensionTileCount;
-    [SerializeField] private int zDimensionTileCount;
+    
+    [SerializeField][Min(3)] private int xDimensionTileCount;
+    [SerializeField][Min(3)] private int zDimensionTileCount;
     [SerializeField] private TileFactory tileFactory;
     [SerializeField] private Transform tileStartPoint;
+    [SerializeField] private Transform floorTransform;
+    [SerializeField] private Transform sealingTransform;
+
+    private float scaleFactorForFloorAndSealingX = 1f;
+    private float scaleFactorForFloorAndSealingZ = 1f;
 
     public IMapGenerator mapGenerator;
 
@@ -30,8 +35,32 @@ public class TileManager : MonoBehaviour
     {
         mapGenerator = new RandomMapGenerator(xDimensionTileCount, zDimensionTileCount, tileFactory, tileFactory.GetTileWidth, tileStartPoint, transform);
         mapGenerator.GenerateMap();
+        ScaleFloorAndSealing();
     }
-    
+
+    private void ScaleFloorAndSealing()
+    {
+        float ratioX = xDimensionTileCount / 25f;
+
+        if (ratioX > 1f)
+        {
+            scaleFactorForFloorAndSealingX = ratioX;
+        }
+        
+        float ratioZ = zDimensionTileCount / 25f;
+        
+        if (ratioZ > 1f)
+        {
+            scaleFactorForFloorAndSealingZ = ratioZ;
+        }
+
+        Vector3 newScaleForFloorAndSealing = new Vector3(floorTransform.localScale.x * scaleFactorForFloorAndSealingX,
+            floorTransform.localScale.y, floorTransform.localScale.z * scaleFactorForFloorAndSealingZ);
+
+        floorTransform.localScale = newScaleForFloorAndSealing;
+        sealingTransform.localScale = newScaleForFloorAndSealing;
+    }
+
     public Vector3 CalculateMiddlePoint()
     {
         // Get all the tiles in the map
