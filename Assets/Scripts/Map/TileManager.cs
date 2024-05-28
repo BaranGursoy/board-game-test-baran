@@ -57,6 +57,16 @@ public class TileManager : MonoBehaviour
         Vector3 newScaleForFloorAndSealing = new Vector3(floorTransform.localScale.x * scaleFactorForFloorAndSealingX,
             floorTransform.localScale.y, floorTransform.localScale.z * scaleFactorForFloorAndSealingZ);
 
+        Vector3 middlePointFloor = CalculateMiddlePoint();
+        middlePointFloor.y = floorTransform.position.y;
+        
+        Vector3 middlePointSealing = middlePointFloor;
+        middlePointSealing.y = sealingTransform.position.y;
+
+        floorTransform.position = middlePointFloor;
+        sealingTransform.position = middlePointSealing;
+        
+        
         floorTransform.localScale = newScaleForFloorAndSealing;
         sealingTransform.localScale = newScaleForFloorAndSealing;
     }
