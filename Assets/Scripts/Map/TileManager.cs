@@ -81,10 +81,4 @@ public class TileManager : MonoBehaviour
 
         return sumPosition / tileList.Count;
     }
-
-    /*public void GenerateMapFromJSON(string jsonData)
-    {
-        mapGenerator = new JSONMapGenerator(jsonData, tileFactory);
-        mapGenerator.GenerateMap();
-    }*/
 }

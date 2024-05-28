@@ -26,18 +26,18 @@
             StartCoroutine(MoveCoroutine(totalMoveCount, forward));
         }
 
-        private bool FindIfCornerAndIsPassable()
+        private bool FindIsCornerAndIsPassable()
         {
             return mapTiles[_playerTileIndex] is CornerTile foundCornerTile &&
                    (foundCornerTile.IsForward || foundCornerTile.IsStartingTile);
         }
         
-        private bool FindIfCornerIsNotDestination(int destinationTileIndex)
+        private bool FindIsCornerIsNotDestination(int destinationTileIndex)
         {
            return mapTiles[_playerTileIndex] is CornerTile && mapTiles[destinationTileIndex] != mapTiles[_playerTileIndex];
         }
 
-        private bool IfCornerIsDestinationAndIsStart(int destinationTileIndex)
+        private bool IsCornerIsDestinationAndIsStart(int destinationTileIndex)
         {
             return mapTiles[_playerTileIndex] is CornerTile cornerTile && mapTiles[destinationTileIndex] == mapTiles[_playerTileIndex] && cornerTile.IsStartingTile;
         }
@@ -67,7 +67,7 @@
                 
                 Quaternion endRotation = transform.rotation;
                 
-                if ((FindIfCornerAndIsPassable() || FindIfCornerIsNotDestination(destinationTileIndex)) && !IfCornerIsDestinationAndIsStart(destinationTileIndex) )
+                if (((FindIsCornerAndIsPassable() || FindIsCornerIsNotDestination(destinationTileIndex)) && !IsCornerIsDestinationAndIsStart(destinationTileIndex)) || IsCornerIsDestinationAndIsStart(destinationTileIndex))
                 {
                     float multiplier = forward ? 1f : -1f;
                     
