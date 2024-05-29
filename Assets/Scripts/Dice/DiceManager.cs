@@ -18,6 +18,9 @@ public class DiceManager : MonoBehaviour
     private bool _allDicesStopped = false;
 
     private Vector3 _spawnPointForDiceManager;
+
+    private float zDistance;
+    private float xDistance;
     
     public List<int> targetedResult = new List<int>();
     
@@ -174,19 +177,17 @@ public class DiceManager : MonoBehaviour
         transform.position = new Vector3(_spawnPointForDiceManager.x, transform.position.y, _spawnPointForDiceManager.z);
         
         Vector3 viewportThrowingPosition = Camera.main.WorldToViewportPoint(transform.position);
+
+        viewportThrowingPosition.x = Mathf.Clamp01(viewportThrowingPosition.x);
+        viewportThrowingPosition.y = Mathf.Clamp01(viewportThrowingPosition.y);
+        viewportThrowingPosition.z = Camera.main.nearClipPlane + 1f;
+            
+        Vector3 newThrowingPosition = Camera.main.ViewportToWorldPoint(viewportThrowingPosition);
+
+        newThrowingPosition.y = transform.position.y;
+            
+        transform.position = newThrowingPosition;
         
-        if (viewportThrowingPosition.x < 0 || viewportThrowingPosition.x > 1 || 
-            viewportThrowingPosition.y < 0 || viewportThrowingPosition.y > 1)
-        {
-            viewportThrowingPosition.x = Mathf.Clamp01(viewportThrowingPosition.x);
-            viewportThrowingPosition.y = Mathf.Clamp01(viewportThrowingPosition.y);
-            
-            Vector3 newThrowingPosition = Camera.main.ViewportToWorldPoint(viewportThrowingPosition);
-            
-            newThrowingPosition.y = transform.position.y;
-            
-            transform.position = newThrowingPosition;
-        }
 
         Vector3 spawnPosition = transform.position + Random.insideUnitSphere;
         spawnPosition.y = transform.position.y;
@@ -212,7 +213,6 @@ public class DiceManager : MonoBehaviour
 
 
     [Serializable]
-
     public struct DiceData
     {
         public GameObject diceObject;

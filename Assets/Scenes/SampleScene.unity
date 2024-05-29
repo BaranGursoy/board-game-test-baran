@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 791752}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.29, y: 0, z: -5.13}
+  m_LocalPosition: {x: -1.29, y: -0.1, z: -5.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -190,7 +190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -31.4287, y: -53.658}
+  m_AnchoredPosition: {x: -31.42871, y: -53.65796}
   m_SizeDelta: {x: 62.8573, y: 22.7167}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9308363
@@ -2578,8 +2578,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb55fa3408aa9749823376fd2ea4590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDimensionTileCount: 100
-  zDimensionTileCount: 100
+  xDimensionTileCount: 3
+  zDimensionTileCount: 3
   tileFactory: {fileID: 606109918}
   tileStartPoint: {fileID: 791753}
   floorTransform: {fileID: 1157331632}
