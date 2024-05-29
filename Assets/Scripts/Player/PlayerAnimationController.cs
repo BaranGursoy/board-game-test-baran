@@ -12,8 +12,8 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Awake()
     {
-        ActionHandler.PlayerCanMove += PlayJumpingAnimation;
-        ActionHandler.PlayerStopped += PlayIdleAnimation;
+        GameActions.PlayerCanMove += PlayJumpingAnimation;
+        GameActions.PlayerStopped += PlayIdleAnimation;
     }
 
     private void PlayIdleAnimation()

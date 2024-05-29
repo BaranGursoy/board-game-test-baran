@@ -21,8 +21,8 @@ public class UIFlyCurrencyEffect : MonoBehaviour
 
     private void Awake()
     {
-        ActionHandler.SpawnCurrency += SpawnCurrencyAtWorldPosition;
-        ActionHandler.CurrencyReachedDestination += CheckForAllCurrenciesReachedDestination;
+        GameActions.SpawnCurrency += SpawnCurrencyAtWorldPosition;
+        GameActions.CurrencyReachedDestination += CheckForAllCurrenciesReachedDestination;
     }
 
     private void Start()
@@ -91,17 +91,17 @@ public class UIFlyCurrencyEffect : MonoBehaviour
         {
             int leftToSend = quantity % _currencySpawnCount;
             int lastToSendTotal = oneCurrencyToQuantity + leftToSend;
-            ActionHandler.SendItemToInventory?.Invoke(itemType, lastToSendTotal);
+            GameActions.SendItemToInventory?.Invoke(itemType, lastToSendTotal);
         }
 
         else
         {
-            ActionHandler.SendItemToInventory?.Invoke(itemType, oneCurrencyToQuantity);
+            GameActions.SendItemToInventory?.Invoke(itemType, oneCurrencyToQuantity);
         }
         
         if (_reachedCurrencies == _currencySpawnCount)
         {
-            ActionHandler.AllCurrenciesReachedInventory?.Invoke();
+            GameActions.AllCurrenciesReachedInventory?.Invoke();
             _reachedCurrencies = 0;
         }
     }

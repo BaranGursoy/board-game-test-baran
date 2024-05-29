@@ -8,7 +8,7 @@ public class InventorySFXController : MonoBehaviour
     [SerializeField] private AudioSource currencyGainedAudioSource;
     private void Awake()
     {
-        ActionHandler.AllCurrenciesReachedInventory += PlayCurrencyGainedSFX;
+        GameActions.AllCurrenciesReachedInventory += PlayCurrencyGainedSFX;
     }
 
     private void PlayCurrencyGainedSFX()

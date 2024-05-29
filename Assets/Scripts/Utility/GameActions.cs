@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public static class ActionHandler
+public static class GameActions
 {
     public static UnityAction<ItemType, int> SendItemToInventory;
     public static UnityAction HideDiceButton;

@@ -36,7 +36,7 @@ public class CornerTile : MapTile
     private IEnumerator StoppedOnCornerTileCoroutine()
     {
         yield return new WaitForSeconds(1f);
-        ActionHandler.PlayerCanMove?.Invoke(moveTileCount, goForward);
+        GameActions.PlayerCanMove?.Invoke(moveTileCount, goForward);
     }
 
     public void SetAsStartingTile()

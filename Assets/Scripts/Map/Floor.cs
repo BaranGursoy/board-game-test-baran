@@ -9,8 +9,8 @@ public class Floor : MonoBehaviour
 
     private void Awake()
     {
-        ActionHandler.DiceTouchedTheFloor += SetFirstDiceTouchedTheFloor;
-        ActionHandler.AllDicesStopped += ResetFirstDiceTouchedTheFloor;
+        GameActions.DiceTouchedTheFloor += SetFirstDiceTouchedTheFloor;
+        GameActions.AllDicesStopped += ResetFirstDiceTouchedTheFloor;
     }
 
     private void ResetFirstDiceTouchedTheFloor()
@@ -23,6 +23,6 @@ public class Floor : MonoBehaviour
         if (firstDiceTouchedTheFloor) return;
             
         firstDiceTouchedTheFloor = true;
-        ActionHandler.FirstDiceTouchedTheFloor?.Invoke();
+        GameActions.FirstDiceTouchedTheFloor?.Invoke();
     }
 }

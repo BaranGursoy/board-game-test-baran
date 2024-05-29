@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        ActionHandler.SendItemToInventory += AddItemToInventory;
+        GameActions.SendItemToInventory += AddItemToInventory;
     }
 
     private void Start()

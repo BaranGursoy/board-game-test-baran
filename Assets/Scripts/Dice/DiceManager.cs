@@ -38,8 +38,8 @@ public class DiceManager : MonoBehaviour
     
     private void Awake()
     {
-        ActionHandler.DiceStopped += CanPlayerMove;
-        ActionHandler.MapGenerationFinished += SetSpawnPoint;
+        GameActions.DiceStopped += CanPlayerMove;
+        GameActions.MapGenerationFinished += SetSpawnPoint;
     }
 
     private void SetSpawnPoint()
@@ -54,8 +54,8 @@ public class DiceManager : MonoBehaviour
 
         if (_stoppedDiceCount == _totalDiceCount)
         {
-            ActionHandler.AllDicesStopped?.Invoke();
-            ActionHandler.PlayerCanMove?.Invoke(_totalDiceResult, true); // True = movement is forwards
+            GameActions.AllDicesStopped?.Invoke();
+            GameActions.PlayerCanMove?.Invoke(_totalDiceResult, true); // True = movement is forwards
 
             _allDicesStopped = true;
 
@@ -89,7 +89,7 @@ public class DiceManager : MonoBehaviour
         }
 
         _totalDiceResult = totalFaces;
-        ActionHandler.PlayerCanMove?.Invoke(_totalDiceResult, true);
+        GameActions.PlayerCanMove?.Invoke(_totalDiceResult, true);
     }
 
     private void SetDicesInformation()
@@ -105,7 +105,7 @@ public class DiceManager : MonoBehaviour
     }
     public void ThrowTheDice()
     {
-        ActionHandler.HideDiceButton?.Invoke();
+        GameActions.HideDiceButton?.Invoke();
 
         _allDicesStopped = false;
 

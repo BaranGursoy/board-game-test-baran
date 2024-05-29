@@ -9,7 +9,7 @@ public class PlayerParticleController : MonoBehaviour
 
     private void Awake()
     {
-        ActionHandler.PlayerStoppedOnItemTile += PlayItemWonParticles;
+        GameActions.PlayerStoppedOnItemTile += PlayItemWonParticles;
     }
 
     private void PlayItemWonParticles()

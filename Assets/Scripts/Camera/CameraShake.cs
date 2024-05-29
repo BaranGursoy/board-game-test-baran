@@ -11,7 +11,7 @@ public class CameraShake : MonoBehaviour
 
         private void Awake()
         { 
-                ActionHandler.FirstDiceTouchedTheFloor += ShakeCamera;
+                GameActions.FirstDiceTouchedTheFloor += ShakeCamera;
         }
 
         private void ShakeCamera()

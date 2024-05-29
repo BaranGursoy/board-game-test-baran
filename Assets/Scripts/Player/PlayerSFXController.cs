@@ -10,8 +10,8 @@ public class PlayerSFXController : MonoBehaviour
 
     private void Awake()
     {
-        ActionHandler.PlayerTouchedTheBoard += PlayBoardTouchSFX;
-        ActionHandler.PlayerStoppedOnItemTile += PlayGetCurrencySFX;
+        GameActions.PlayerTouchedTheBoard += PlayBoardTouchSFX;
+        GameActions.PlayerStoppedOnItemTile += PlayGetCurrencySFX;
     }
 
     private void PlayBoardTouchSFX()

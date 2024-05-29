@@ -12,8 +12,8 @@
 
         private void Awake()
         {
-            ActionHandler.MapGenerationFinished += GetTileList;
-            ActionHandler.PlayerCanMove += MovePlayer;
+            GameActions.MapGenerationFinished += GetTileList;
+            GameActions.PlayerCanMove += MovePlayer;
         }
 
         private void GetTileList()
@@ -112,14 +112,14 @@
                 transform.position = endPosition;
                 transform.rotation = endRotation;
                 
-                ActionHandler.PlayerTouchedTheBoard?.Invoke();
+                GameActions.PlayerTouchedTheBoard?.Invoke();
             }
             
             mapTiles[_playerTileIndex].StoppedOnTile();
 
             if (mapTiles[_playerTileIndex] is not CornerTile cornerTile || cornerTile.IsStartingTile)
             {
-                ActionHandler.PlayerStopped?.Invoke();
+                GameActions.PlayerStopped?.Invoke();
             }
         }
 

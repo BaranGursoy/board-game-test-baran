@@ -7,8 +7,8 @@ public class RollDiceButton : MonoBehaviour
 {
     private void Awake()
     {
-        ActionHandler.HideDiceButton += HideButton;
-        ActionHandler.PlayerStopped += ShowButton;
+        GameActions.HideDiceButton += HideButton;
+        GameActions.PlayerStopped += ShowButton;
     }
 
     public void ShowButton()

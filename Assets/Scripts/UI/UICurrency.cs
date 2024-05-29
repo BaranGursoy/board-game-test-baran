@@ -57,7 +57,7 @@ public class UICurrency : MonoBehaviour
 
       currencyRectTransform.transform.position = endPosition;
       
-      ActionHandler.CurrencyReachedDestination?.Invoke(itemType, quantity);
+      GameActions.CurrencyReachedDestination?.Invoke(itemType, quantity);
       ObjectPooler.Instance.ReturnToPool(gameObject, PrefabType.CurrencySprite);
    }
 }
