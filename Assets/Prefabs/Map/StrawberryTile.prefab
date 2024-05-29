@@ -550,6 +550,18 @@ PrefabInstance:
       value: TileSpriteRenderer
       objectReference: {fileID: 0}
     - target: {fileID: 6778941845167014753, guid: 893449d3d9380b64fa4b49735f9c4ead, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5744996
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778941845167014753, guid: 893449d3d9380b64fa4b49735f9c4ead, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9446996
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778941845167014753, guid: 893449d3d9380b64fa4b49735f9c4ead, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5.998843
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778941845167014753, guid: 893449d3d9380b64fa4b49735f9c4ead, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}

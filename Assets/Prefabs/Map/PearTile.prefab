@@ -753,34 +753,6 @@ PrefabInstance:
       value: TileSpriteRenderer
       objectReference: {fileID: 0}
     - target: {fileID: 6778941845167014753, guid: 893449d3d9380b64fa4b49735f9c4ead, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6778941845167014753, guid: 893449d3d9380b64fa4b49735f9c4ead, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.56999964
-      objectReference: {fileID: 0}
-    - target: {fileID: 6778941845167014753, guid: 893449d3d9380b64fa4b49735f9c4ead, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.236
-      objectReference: {fileID: 0}
-    - target: {fileID: 6778941845167014753, guid: 893449d3d9380b64fa4b49735f9c4ead, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6778941845167014753, guid: 893449d3d9380b64fa4b49735f9c4ead, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6778941845167014753, guid: 893449d3d9380b64fa4b49735f9c4ead, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6778941845167014753, guid: 893449d3d9380b64fa4b49735f9c4ead, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6778941845167014753, guid: 893449d3d9380b64fa4b49735f9c4ead, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 90
       objectReference: {fileID: 0}
