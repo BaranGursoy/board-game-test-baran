@@ -139,11 +139,14 @@
                 return destinationIndex;
             }
 
-            int destinationTileNumber = (destinationIndex + 1) % mapTiles.Count;
+            int destinationTileNumber = (destinationIndex + 1);
+            
+            int loopedDestinationTileNumber = destinationTileNumber == mapTiles.Count ? destinationTileNumber : destinationTileNumber % mapTiles.Count;
+            
 
-            Debug.Log($"Player will reach to tile number {destinationTileNumber}");
+            Debug.Log($"Player will reach to tile number {loopedDestinationTileNumber}");
 
-            return destinationTileNumber - 1;
+            return loopedDestinationTileNumber - 1;
         }
 
     }
