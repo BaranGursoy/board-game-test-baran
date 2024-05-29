@@ -19,15 +19,14 @@ public class DiceManager : MonoBehaviour
 
     private Vector3 _spawnPointForDiceManager;
 
-    private float zDistance;
-    private float xDistance;
+    private float _failSafeDuration = 10f;
     
     public List<int> targetedResult = new List<int>();
     
     [HideInInspector]
     public List<DiceData> diceDataList;
 
-    public static readonly Dictionary<int, Vector3> RotationMatrix = new Dictionary<int, Vector3> // This matrix is for our dice's default rotation (2 is on top)
+    public static readonly Dictionary<int, Vector3> RotationMatrix = new() // This matrix is for our dice's default rotation (2 is on top)
     {
         {1, new Vector3(270, 0, 0)},
         {2, new Vector3(0, 0, 0)},
@@ -74,7 +73,7 @@ public class DiceManager : MonoBehaviour
     {
         float passedTime = 0f;
 
-        while (passedTime < 6f)
+        while (passedTime < _failSafeDuration)
         {
             if(_allDicesStopped) yield break;
             

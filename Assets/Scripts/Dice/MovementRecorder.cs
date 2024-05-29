@@ -32,14 +32,14 @@ public class MovementRecorder : MonoBehaviour
     
     private void GetInitialState()
     {
-        foreach (var gameObject in objectsToRecord)
+        foreach (var diceObject in objectsToRecord)
         {
-            Vector3 initialPosition = gameObject.transform.position;
-            Quaternion initialRotation = gameObject.transform.rotation;
+            Vector3 initialPosition = diceObject.transform.position;
+            Quaternion initialRotation = diceObject.transform.rotation;
 
-            Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-            rb.maxAngularVelocity = 1000;
-
+            Rigidbody rb = diceObject.GetComponent<Rigidbody>();
+            rb.maxAngularVelocity = 1000f;
+            
             RecordingData data = new RecordingData(rb, initialPosition,
                                                        initialRotation);
             recordingDataList.Add(data);
