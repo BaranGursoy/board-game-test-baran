@@ -12,6 +12,11 @@ public class PlayerParticleController : MonoBehaviour
         GameActions.PlayerStoppedOnItemTile += PlayItemWonParticles;
     }
 
+    private void OnDestroy()
+    {
+        GameActions.PlayerStoppedOnItemTile -= PlayItemWonParticles;
+    }
+
     private void PlayItemWonParticles()
     {
         playerWonItemParticleSystem.Play();

@@ -10,14 +10,7 @@ public class DiceInteraction : MonoBehaviour
     public bool isContactWithDice;
     public bool isInSimulation = true;
     public bool isNotMoving = false;
-
-    /*
-    [Header("References")]
-    public DiceData diceData;
-    public Dice diceLogic;
-    public MeshRenderer meshRenderer;
-    */
-
+    
     public AudioSource floorCollisionSound;
     public AudioSource diceCollisionSound;
 

@@ -11,6 +11,11 @@ public class InventorySFXController : MonoBehaviour
         GameActions.AllCurrenciesReachedInventory += PlayCurrencyGainedSFX;
     }
 
+    private void OnDestroy()
+    {
+        GameActions.AllCurrenciesReachedInventory -= PlayCurrencyGainedSFX;
+    }
+
     private void PlayCurrencyGainedSFX()
     {
         currencyGainedAudioSource.Play();

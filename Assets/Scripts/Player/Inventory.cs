@@ -14,6 +14,11 @@ public class Inventory : MonoBehaviour
         GameActions.SendItemToInventory += AddItemToInventory;
     }
 
+    private void OnDestroy()
+    {
+        GameActions.SendItemToInventory -= AddItemToInventory;
+    }
+
     private void Start()
     {
         InitializeInventory();

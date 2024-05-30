@@ -25,6 +25,12 @@ public class UIFlyCurrencyEffect : MonoBehaviour
         GameActions.CurrencyReachedDestination += CheckForAllCurrenciesReachedDestination;
     }
 
+    private void OnDestroy()
+    {
+        GameActions.SpawnCurrency -= SpawnCurrencyAtWorldPosition;
+        GameActions.CurrencyReachedDestination -= CheckForAllCurrenciesReachedDestination;
+    }
+
     private void Start()
     {
         _mainCamera = Camera.main;

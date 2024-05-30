@@ -73,16 +73,13 @@ public class TileManager : MonoBehaviour
 
     public Vector3 CalculateMiddlePoint()
     {
-        // Get all the tiles in the map
         List<MapTile> tileList = mapGenerator.GetTileList();
-
-        // If there are no tiles, return Vector3.zero
+        
         if (tileList.Count == 0)
         {
             return Vector3.zero;
         }
-
-        // Calculate the average position of all the tiles
+        
         Vector3 sumPosition = Vector3.zero;
         foreach (MapTile tile in tileList)
         {

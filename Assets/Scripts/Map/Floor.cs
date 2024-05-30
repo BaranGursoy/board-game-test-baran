@@ -13,6 +13,12 @@ public class Floor : MonoBehaviour
         GameActions.AllDicesStopped += ResetFirstDiceTouchedTheFloor;
     }
 
+    private void OnDestroy()
+    {
+        GameActions.DiceTouchedTheFloor -= SetFirstDiceTouchedTheFloor;
+        GameActions.AllDicesStopped -= ResetFirstDiceTouchedTheFloor;
+    }
+
     private void ResetFirstDiceTouchedTheFloor()
     {
         firstDiceTouchedTheFloor = false;

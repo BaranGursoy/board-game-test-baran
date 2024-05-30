@@ -11,6 +11,12 @@ public class RollDiceButton : MonoBehaviour
         GameActions.PlayerStopped += ShowButton;
     }
 
+    private void OnDestroy()
+    {
+        GameActions.HideDiceButton -= HideButton;
+        GameActions.PlayerStopped -= ShowButton;
+    }
+
     public void ShowButton()
     {
         gameObject.SetActive(true);

@@ -16,6 +16,12 @@
             GameActions.PlayerCanMove += MovePlayer;
         }
 
+        private void OnDestroy()
+        {
+            GameActions.MapGenerationFinished -= GetTileList;
+            GameActions.PlayerCanMove -= MovePlayer;
+        }
+
         private void GetTileList()
         {
             mapTiles = TileManager.Instance.mapGenerator.GetTileList();
@@ -40,6 +46,13 @@
         private bool IsCornerIsDestinationAndIsStart(int destinationTileIndex)
         {
             return mapTiles[_playerTileIndex] is CornerTile cornerTile && mapTiles[destinationTileIndex] == mapTiles[_playerTileIndex] && cornerTile.IsStartingTile;
+        }
+
+        private bool ShouldPlayerRotate(int destinationTileIndex)
+        {
+            return ((FindIsCornerAndIsPassable() || FindIsCornerIsNotDestination(destinationTileIndex)) &&
+                    !IsCornerIsDestinationAndIsStart(destinationTileIndex)) ||
+                   IsCornerIsDestinationAndIsStart(destinationTileIndex);
         }
 
         private IEnumerator MoveCoroutine(int totalMoveCount, bool forward)
@@ -67,7 +80,7 @@
                 
                 Quaternion endRotation = transform.rotation;
                 
-                if (((FindIsCornerAndIsPassable() || FindIsCornerIsNotDestination(destinationTileIndex)) && !IsCornerIsDestinationAndIsStart(destinationTileIndex)) || IsCornerIsDestinationAndIsStart(destinationTileIndex))
+                if (ShouldPlayerRotate(destinationTileIndex))
                 {
                     float multiplier = forward ? 1f : -1f;
                     

@@ -14,6 +14,11 @@ public class CameraShake : MonoBehaviour
                 GameActions.FirstDiceTouchedTheFloor += ShakeCamera;
         }
 
+        private void OnDestroy()
+        {
+                GameActions.FirstDiceTouchedTheFloor -= ShakeCamera;
+        }
+
         private void ShakeCamera()
         { 
                 StartCoroutine(CameraShakeCoroutine());

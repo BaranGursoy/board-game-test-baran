@@ -42,6 +42,12 @@ public class DiceManager : MonoBehaviour
         GameActions.MapGenerationFinished += SetSpawnPoint;
     }
 
+    private void OnDestroy()
+    {
+        GameActions.DiceStopped -= CanPlayerMove;
+        GameActions.MapGenerationFinished -= SetSpawnPoint;
+    }
+
     private void SetSpawnPoint()
     {
         _spawnPointForDiceManager = TileManager.Instance.CalculateMiddlePoint();
@@ -126,11 +132,11 @@ public class DiceManager : MonoBehaviour
             diceDataList[i].diceLogic.FindFaceResult();
         }
 
-        //Reset and Alter the result FOR NOW, all 2
+        //Reset and alter the result
         movementRecorder.ResetToInitialState();
         for (int i = 0; i < targetedResult.Count; i++)
         {
-            diceDataList[i].diceLogic.RotateDice(((int)targetedResult[i]));
+            diceDataList[i].diceLogic.RotateDice(targetedResult[i]);
         }
 
         movementRecorder.PlayRecording();

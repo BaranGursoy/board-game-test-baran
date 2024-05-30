@@ -14,6 +14,12 @@ public class PlayerSFXController : MonoBehaviour
         GameActions.PlayerStoppedOnItemTile += PlayGetCurrencySFX;
     }
 
+    private void OnDestroy()
+    {
+        GameActions.PlayerTouchedTheBoard -= PlayBoardTouchSFX;
+        GameActions.PlayerStoppedOnItemTile -= PlayGetCurrencySFX;
+    }
+
     private void PlayBoardTouchSFX()
     {
         playerBoardTouchAudioSource.Play();

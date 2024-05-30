@@ -17,6 +17,11 @@ public class InventoryAnimationController : MonoBehaviour
         GameActions.CurrencyReachedDestination += PlayBounceAnimation;
     }
 
+    private void OnDestroy()
+    {
+        GameActions.CurrencyReachedDestination -= PlayBounceAnimation;
+    }
+
     private void PlayBounceAnimation(ItemType itemType, int dummyQuantity)
     {
         int animatorState;

@@ -16,6 +16,12 @@ public class PlayerAnimationController : MonoBehaviour
         GameActions.PlayerStopped += PlayIdleAnimation;
     }
 
+    private void OnDestroy()
+    {
+        GameActions.PlayerCanMove -= PlayJumpingAnimation;
+        GameActions.PlayerStopped -= PlayIdleAnimation;
+    }
+
     private void PlayIdleAnimation()
     {
         playerAnimator.Play(Idle);
